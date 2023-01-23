@@ -23,6 +23,12 @@ public class Tablero {
         return celdas[cordenada.getFila()-1][cordenada.getCol()-'A'];
     }
 
+    public void hightlight(Cordenada[] cordenadas){
+        for (Cordenada c : cordenadas){
+            getCelda(c).highLight();
+        }
+    }
+
     public void resetColors(){
         for (Celda[] celdas1: celdas)
             for (Celda c: celdas1)
