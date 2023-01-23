@@ -10,6 +10,11 @@ public class Tablero {
                 celdas[fila][columna]= new Celda(this, new Cordenada((char)('A'+columna),1+fila));
     }
 
+    public void placePieces(){
+        new BlackKnight(getCelda(new Cordenada('C',8)));
+        new BlackKnight(getCelda(new Cordenada('B',4)));
+    }
+
     public Celda getCelda(Cordenada cordenada){
         if (cordenada.getFila()<1||cordenada.getFila()>8)
             return null;

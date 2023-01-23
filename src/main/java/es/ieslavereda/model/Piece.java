@@ -5,13 +5,26 @@ import javafx.scene.control.Cell;
 import static com.diogonunes.jcolor.Ansi.colorize;
 
 
-public class Piece {
+public abstract class Piece {
     private Type type;
     private Celda celda;
 
     public Piece(Type shape, Celda celda){
         this.type =shape;
         this.celda = celda;
+        putInYourPlace();
+    }
+
+    public boolean moveTo(Cordenada cordenada){
+        Tablero t = getCelda().getTablero();
+        if (t.getCelda(cordenada)!=null){
+            getCelda().setPiece(null);
+            Celda celda = t.getCelda(cordenada);
+            celda.setPiece(this);
+            this.celda = celda;
+            return true;
+        }
+        return false;
     }
 
     public Celda getCelda(){
@@ -22,14 +35,17 @@ public class Piece {
         return type.color;
     }
 
-    public void putInYourPlace()
+    public void putInYourPlace(){
+        celda.setPiece(this);
+    }
 
 
     @Override
     public String toString(){
-        return colorize(""+ type.getShape(), type.color.getAttribute());
+        return colorize(colorize(String.valueOf((char)(type.getShape())), type.color.getAttribute()),getCelda().getColor().getAttribute());
     }
 
+    public abstract Cordenada[] getNextMovements();
 
     public enum Type {
         BLACK_PAWN('♟',Color.BLACK),
