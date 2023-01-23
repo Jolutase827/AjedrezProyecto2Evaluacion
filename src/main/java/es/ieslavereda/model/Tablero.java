@@ -11,8 +11,20 @@ public class Tablero {
     }
 
     public void placePieces(){
-        new BlackKnight(getCelda(new Cordenada('C',8)));
-        new BlackKnight(getCelda(new Cordenada('B',4)));
+        new BlackKnight(getCelda(new Cordenada('G',1)));
+        new BlackKnight(getCelda(new Cordenada('B',1)));
+        new WhiteKnight(getCelda(new Cordenada('B',8)));
+        new WhiteKnight(getCelda(new Cordenada('G',8)));
+        new WhiteRook(getCelda(new Cordenada('H',8)));
+        new WhiteRook(getCelda(new Cordenada('A',8)));
+        new BlackRook(getCelda(new Cordenada('A',1)));
+        new BlackRook(getCelda(new Cordenada('H',1)));
+        new WhiteBishop(getCelda(new Cordenada('C',8)));
+        new WhiteBishop(getCelda(new Cordenada('F',8)));
+        new BlackBishop(getCelda(new Cordenada('C',1)));
+        new BlackBishop(getCelda(new Cordenada('F',1)));
+        new WhiteQueen(getCelda(new Cordenada('D',8)));
+        new BlackQueen(getCelda(new Cordenada('D',1)));
     }
 
     public Celda getCelda(Cordenada cordenada){
