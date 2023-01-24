@@ -15,17 +15,16 @@ public abstract class Piece {
         putInYourPlace();
     }
 
-    public boolean moveTo(Cordenada cordenada){
+    public void moveTo(Cordenada cordenada){
         Tablero t = getCelda().getTablero();
         if (t.getCelda(cordenada)!=null){
             getCelda().setPiece(null);
             Celda celda = t.getCelda(cordenada);
             celda.setPiece(this);
             this.celda = celda;
-            return true;
         }
-        return false;
     }
+    
 
     public Celda getCelda(){
         return celda;
@@ -46,6 +45,7 @@ public abstract class Piece {
     }
 
     public abstract Cordenada[] getNextMovements();
+
 
     public enum Type {
         BLACK_PAWN('♟',Color.BLACK),

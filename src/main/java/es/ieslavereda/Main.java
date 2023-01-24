@@ -10,9 +10,10 @@ public class Main {
 
         t.placePieces();
         System.out.println(t);
-        Cordenada[] cordenadas = t.getCelda(new Cordenada('D',1)).getPiece().getNextMovements();
+        Cordenada[] cordenadas = t.getCelda(new Cordenada('E',2)).getPiece().getNextMovements();
         t.hightlight(cordenadas);
         System.out.println(t);
-
+//        t.getCelda(new Cordenada('E',2)).getPiece().moveTo(new Cordenada('E',3));
+//        System.out.println(t);
     }
 }

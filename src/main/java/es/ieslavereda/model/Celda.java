@@ -64,6 +64,7 @@ public class Celda {
         return colorize(" ", color.getAttribute())+ piece.toString() + colorize(" ",color.getAttribute());
     }
 
+
     public void resetColor(){
         color = original;
     }
