@@ -1,7 +1,5 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.Tool;
-
 public final class WhitePawn extends Pawn {
 
 

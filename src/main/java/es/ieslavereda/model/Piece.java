@@ -1,5 +1,6 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListCoordinate;
 import javafx.scene.control.Cell;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
@@ -44,7 +45,9 @@ public abstract class Piece {
         return colorize(colorize(String.valueOf((char)(type.getShape())), type.color.getAttribute()),getCelda().getColor().getAttribute());
     }
 
-    public abstract Cordenada[] getNextMovements();
+    public abstract ListCoordinate getNextMovements();
+
+    public abstract ListCoordinate getNextMovements(Piece p);
 
 
     public enum Type {

@@ -1,17 +1,17 @@
 package es.ieslavereda.model;
 
-import javax.tools.Tool;
+import es.ieslavereda.TAD.ListCoordinate;
 
 public abstract class Knight extends Piece{
-    private Cordenada[] cordenadas;
+    private ListCoordinate listCoordinate;
 
     public Knight(Type type, Celda celda){
         super(type,celda);
     }
 
     @Override
-    public Cordenada[] getNextMovements(){
-        cordenadas = new Cordenada[0];
+    public ListCoordinate getNextMovements(){
+        listCoordinate = new ListCoordinate();
         Cordenada position = getCelda().getCordenada();
         Cordenada c;
 
@@ -43,16 +43,16 @@ public abstract class Knight extends Piece{
         c=position.left().left().down();
         check(c);
 
-        return cordenadas;
+        return listCoordinate;
     }
 
     private void check(Cordenada c){
         Tablero tablero = getCelda().getTablero();
         if (tablero.getCelda(c)!=null){
             if (tablero.getCelda(c).isEmpty())
-                cordenadas = es.ieslavereda.Tool.add(cordenadas,c);
+                listCoordinate.add(c);
             else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
-                cordenadas = es.ieslavereda.Tool.add(cordenadas,c);
+                listCoordinate.add(c);
         }
     }
 }

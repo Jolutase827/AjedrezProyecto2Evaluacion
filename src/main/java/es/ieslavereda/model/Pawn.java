@@ -1,9 +1,9 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.Tool;
+import es.ieslavereda.TAD.ListCoordinate;
 
 public abstract class Pawn extends Piece {
-    private Cordenada[] cordenadas;
+    private ListCoordinate list;
 
 
     public Pawn(Type type, Celda celda){
@@ -20,10 +20,10 @@ public abstract class Pawn extends Piece {
 
 
     @Override
-    public Cordenada[] getNextMovements() {
-        cordenadas = new Cordenada[0];
+    public ListCoordinate getNextMovements() {
+        list = new ListCoordinate();
         getNextMovementsPawn();
-        return cordenadas;
+        return list;
     }
 
 
@@ -33,7 +33,7 @@ public abstract class Pawn extends Piece {
         Tablero tablero = getCelda().getTablero();
         if (tablero.getCelda(cordenada)!=null)
             if (tablero.getCelda(cordenada).isEmpty())
-                cordenadas = Tool.add(cordenadas,cordenada);
+                list.add(cordenada);
     }
 
     public void checkEnemy(Cordenada cordenada){
@@ -41,7 +41,7 @@ public abstract class Pawn extends Piece {
         if (tablero.getCelda(cordenada)!=null)
             if (!tablero.getCelda(cordenada).isEmpty())
                 if (tablero.getCelda(cordenada).getPiece().getColor()!=getColor())
-                    cordenadas = Tool.add(cordenadas,cordenada);
+                    list.add(cordenada);
     }
 
     public abstract void trasnform();

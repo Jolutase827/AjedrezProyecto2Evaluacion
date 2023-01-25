@@ -1,6 +1,6 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.Tool;
+import es.ieslavereda.TAD.ListCoordinate;
 
 public abstract class Rook extends Piece {
 
@@ -8,8 +8,8 @@ public abstract class Rook extends Piece {
         super(type,celda);
     }
 
-    public static Cordenada[] getNextMovementsAsRook(Piece p) {
-        Cordenada[] cordenadas = new Cordenada[0];
+    public static ListCoordinate getNextMovementsAsRook(Piece p) {
+        ListCoordinate listCordinates = new ListCoordinate();
         Cordenada posicion = p.getCelda().getCordenada();
         Tablero t = p.getCelda().getTablero();
         Cordenada c;
@@ -18,48 +18,48 @@ public abstract class Rook extends Piece {
         //Up
         c = posicion.up();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()) {
-            cordenadas = Tool.add(cordenadas, c);
+            listCordinates.add(c);
             c = c.up();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCordinates.add(c);
 
         //Down
 
         c = posicion.down();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()){
-            cordenadas = Tool.add(cordenadas, c);
+            listCordinates.add(c);
             c = c.down();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCordinates.add(c);
 
         //Left
 
         c = posicion.left();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()){
-            cordenadas = Tool.add(cordenadas, c);
+            listCordinates.add(c);
             c = c.left();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCordinates.add(c);
 
 
         //Right
 
         c = posicion.right();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()) {
-            cordenadas = Tool.add(cordenadas, c);
+            listCordinates.add(c);
             c = c.right();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCordinates.add(c);
 
-        return cordenadas;
+        return listCordinates;
     }
 
     @Override
-    public Cordenada[] getNextMovements() {
+    public ListCoordinate getNextMovements() {
         return getNextMovementsAsRook(this);
     }
 

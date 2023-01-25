@@ -1,5 +1,8 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListCoordinate;
+import es.ieslavereda.TAD.Node;
+
 public class Tablero {
     private Celda[][] celdas;
 
@@ -39,10 +42,12 @@ public class Tablero {
         return celdas[cordenada.getFila()-1][cordenada.getCol()-'A'];
     }
 
-    public void hightlight(Cordenada[] cordenadas){
-        for (Cordenada c : cordenadas){
-            getCelda(c).highLight();
+    public void hightlight(ListCoordinate listCoordinate){
+
+        while(!listCoordinate.isEmpty()) {
+            getCelda(listCoordinate.remove(0)).highLight();
         }
+
     }
 
     public void resetColors(){

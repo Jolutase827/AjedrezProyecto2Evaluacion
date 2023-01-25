@@ -1,6 +1,6 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.Tool;
+import es.ieslavereda.TAD.ListCoordinate;
 
 public abstract class Bishop extends Piece{
     private Cordenada[] cordenadas;
@@ -9,8 +9,8 @@ public abstract class Bishop extends Piece{
         super(type,celda);
     }
 
-    public static Cordenada[] getNextMovementsAsBishop(Piece p){
-        Cordenada[] cordenadas = new Cordenada[0];
+    public static ListCoordinate getNextMovementsAsBishop(Piece p){
+        ListCoordinate listCoordinate = new ListCoordinate();
         Cordenada position = p.getCelda().getCordenada();
         Tablero t = p.getCelda().getTablero();
         Cordenada c;
@@ -19,45 +19,45 @@ public abstract class Bishop extends Piece{
         //Up&Left
         c = position.up().left();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()){
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
             c = c.up().left();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
 
         //Up&Right
         c = position.up().right();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()){
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
             c = c.up().right();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
 
         //Down&Left
         c=position.down().left();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()){
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
             c= c.down().left();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
 
         //Down&Right
         c = position.down().right();
         while (t.getCelda(c)!=null&&t.getCelda(c).isEmpty()){
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
             c = c.down().right();
         }
         if(t.getCelda(c)!=null && t.getCelda(c).getPiece().getColor()!=color)
-            cordenadas = Tool.add(cordenadas,c);
+            listCoordinate.add(c);
 
-        return cordenadas;
+        return listCoordinate;
     }
 
 
     @Override
-    public Cordenada[] getNextMovements(){
+    public ListCoordinate getNextMovements(){
         return getNextMovementsAsBishop(this);
     }
 
