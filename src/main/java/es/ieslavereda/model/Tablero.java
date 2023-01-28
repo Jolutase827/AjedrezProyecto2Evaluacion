@@ -28,6 +28,8 @@ public class Tablero {
         new BlackBishop(getCelda(new Cordenada('F',1)));
         new WhiteQueen(getCelda(new Cordenada('D',8)));
         new BlackQueen(getCelda(new Cordenada('D',1)));
+        new WhiteKing(getCelda(new Cordenada('E',3)));
+        new BlackKing(getCelda(new Cordenada('E',1)));
         for (int i = 0; i<8; i++) {
             new BlackPawn(getCelda(new Cordenada((char)('A'+i), 2)));
             new WhitePawn(getCelda(new Cordenada((char)('A'+i), 7)));

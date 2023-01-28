@@ -1,4 +1,7 @@
 package es.ieslavereda.model;
 
-public class WhiteKing {
+public final class WhiteKing extends King{
+    public WhiteKing(Celda celda){
+        super(Type.WHITE_KING,celda);
+    }
 }

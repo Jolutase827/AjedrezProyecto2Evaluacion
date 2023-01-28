@@ -47,8 +47,6 @@ public abstract class Piece {
 
     public abstract ListCoordinate getNextMovements();
 
-    public abstract ListCoordinate getNextMovements(Piece p);
-
 
     public enum Type {
         BLACK_PAWN('♟',Color.BLACK),

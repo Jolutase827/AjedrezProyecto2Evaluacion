@@ -11,7 +11,7 @@ public class Main {
 
         t.placePieces();
         System.out.println(t);
-        ListCoordinate listCoordinate = t.getCelda(new Cordenada('B',1)).getPiece().getNextMovements();
+        ListCoordinate listCoordinate = t.getCelda(new Cordenada('E',3)).getPiece().getNextMovements();
         t.hightlight(listCoordinate);
         System.out.println(t);
 //        t.getCelda(new Cordenada('E',2)).getPiece().moveTo(new Cordenada('E',3));

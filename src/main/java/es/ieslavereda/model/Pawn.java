@@ -29,14 +29,14 @@ public abstract class Pawn extends Piece {
 
     public abstract void getNextMovementsPawn();
 
-    public void check(Cordenada cordenada){
+    protected void check(Cordenada cordenada){
         Tablero tablero = getCelda().getTablero();
         if (tablero.getCelda(cordenada)!=null)
             if (tablero.getCelda(cordenada).isEmpty())
                 list.add(cordenada);
     }
 
-    public void checkEnemy(Cordenada cordenada){
+    protected void checkEnemy(Cordenada cordenada){
         Tablero tablero = getCelda().getTablero();
         if (tablero.getCelda(cordenada)!=null)
             if (!tablero.getCelda(cordenada).isEmpty())
