@@ -40,12 +40,14 @@ public abstract class Piece {
     }
 
 
+    public abstract ListCoordinate getNextMovements();
+
     @Override
     public String toString(){
         return colorize(colorize(String.valueOf((char)(type.getShape())), type.color.getAttribute()),getCelda().getColor().getAttribute());
     }
 
-    public abstract ListCoordinate getNextMovements();
+
 
 
     public enum Type {
