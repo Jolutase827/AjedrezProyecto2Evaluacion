@@ -5,9 +5,9 @@ import es.ieslavereda.model.Cordenada;
 public class ListCoordinate {
     private int size;
 
-    private Node head;
+    private NodeCoordinate head;
 
-    private Node tail;
+    private NodeCoordinate tail;
 
     public ListCoordinate(){
         head = null;
@@ -15,7 +15,7 @@ public class ListCoordinate {
         size=0;
     }
     public void add(Cordenada cordenada) {
-        Node node = new Node(cordenada);
+        NodeCoordinate node = new NodeCoordinate(cordenada);
         if (head == null) {
             head = node;
             tail = node;
@@ -38,7 +38,7 @@ public class ListCoordinate {
 
     public Cordenada[] toArray(){
         Cordenada[] array = new Cordenada[size];
-        Node aux = head;
+        NodeCoordinate aux = head;
         for (int i = 0; i<size;i++,aux=aux.getNext()){
             array[i] = aux.getInfo();
         }
@@ -54,19 +54,20 @@ public class ListCoordinate {
         if(i == 0){
             removed = head.getInfo();
             head=head.getNext();
-            return removed;
-        }
-        Node aux1= head;
-        Node aux2 = aux1.getNext();
-        while (i>1){
-            aux1=aux2;
-            aux2 = aux2.getNext();
-            i--;
-        }
-        removed = aux2.getInfo();
-        aux1 = aux2.getNext();
-        size--;
 
+        }else {
+            NodeCoordinate aux1 = head;
+            NodeCoordinate aux2 = aux1.getNext();
+            while (i > 1) {
+                aux1 = aux2;
+                aux2 = aux2.getNext();
+                i--;
+            }
+            removed = aux2.getInfo();
+            aux1 = aux2.getNext();
+        }
+
+        size--;
         return removed;
     }
 
@@ -78,7 +79,7 @@ public class ListCoordinate {
 //        tail.setNext(l.head);
 //        tail = l.tail;
 //        size += l.size;
-        Node aux = l.head;
+        NodeCoordinate aux = l.head;
         while (aux!=null){
             addCola(aux.getInfo());
             aux = aux.getNext();
@@ -95,7 +96,7 @@ public class ListCoordinate {
 
     public boolean contains(Cordenada c) {
         boolean encontrado = false;
-        Node aux = head;
+        NodeCoordinate aux = head;
         while (aux != null && !encontrado) {
             if (aux.getInfo() == c)
                 encontrado = true;
@@ -108,7 +109,7 @@ public class ListCoordinate {
         boolean encontrado = false;
         if (i >= size || i < 0)
             return null;
-        Node aux = head;
+        NodeCoordinate aux = head;
         while (i>0) {
             aux = aux.getNext();
             i--;
@@ -118,7 +119,7 @@ public class ListCoordinate {
     }
 
     public void addCola(Cordenada cordenada) {
-        Node node = new Node(cordenada);
+        NodeCoordinate node = new NodeCoordinate(cordenada);
         if (head == null) {
             head = node;
             tail = node;
@@ -145,8 +146,8 @@ public class ListCoordinate {
                 return false;
 
             boolean encontrado = false;
-            Node aux1 = head;
-            Node aux2 = list.head;
+            NodeCoordinate aux1 = head;
+            NodeCoordinate aux2 = list.head;
             while (!encontrado&&aux1!=null) {
                 if (!aux1.equals(aux2))
                     encontrado = true;

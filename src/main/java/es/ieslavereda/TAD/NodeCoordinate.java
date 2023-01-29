@@ -2,17 +2,17 @@ package es.ieslavereda.TAD;
 
 import es.ieslavereda.model.Cordenada;
 
-public class Node {
+public class NodeCoordinate {
     public Cordenada info;
 
-    public Node next;
+    public NodeCoordinate next;
 
-    public Node(Cordenada info){
+    public NodeCoordinate(Cordenada info){
         this.info = info;
         next = null;
     }
 
-    public Node getNext() {
+    public NodeCoordinate getNext() {
         return next;
     }
 
@@ -20,15 +20,15 @@ public class Node {
         return info;
     }
 
-    public void setNext(Node next) {
+    public void setNext(NodeCoordinate next) {
         this.next = next;
     }
 
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Node){
-            Node aux = (Node) obj;
+        if (obj instanceof NodeCoordinate){
+            NodeCoordinate aux = (NodeCoordinate) obj;
             return aux.info == info;
         }
 

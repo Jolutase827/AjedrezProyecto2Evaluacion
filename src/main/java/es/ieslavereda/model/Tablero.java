@@ -1,7 +1,6 @@
 package es.ieslavereda.model;
 
 import es.ieslavereda.TAD.ListCoordinate;
-import es.ieslavereda.TAD.Node;
 
 public class Tablero {
     private Celda[][] celdas;

@@ -25,7 +25,11 @@ public abstract class Piece {
             this.celda = celda;
         }
     }
-    
+
+
+    public Type getType() {
+        return type;
+    }
 
     public Celda getCelda(){
         return celda;
