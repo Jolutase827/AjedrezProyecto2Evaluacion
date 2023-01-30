@@ -5,7 +5,11 @@ import es.ieslavereda.TAD.ListCoordinate;
 public class Tablero {
     private Celda[][] celdas;
 
+    private IDeletePieceManager deletePieceManager;
+
+
     public Tablero(){
+        this.deletePieceManager = new DeletePieceManagerDE();
         celdas = new Celda[8][8];
         for (int fila =0 ; fila<celdas.length; fila++)
             for ( int columna =0 ; columna< celdas[fila].length;columna++)
@@ -68,7 +72,9 @@ public class Tablero {
             salida += " " + (i+1)+ "\n";
         }
 
-        salida += "    A  B  C  D  E  F  G  H\n";
+        salida += "    A  B  C  D  E  F  G  H\n\n" + deletePieceManager;
+
+
         return salida;
     }
 }

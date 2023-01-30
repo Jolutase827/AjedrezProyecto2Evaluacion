@@ -79,6 +79,10 @@ public abstract class Piece {
         public char getShape(){
             return shape;
         }
+
+        public Color getColor() {
+            return color;
+        }
     }
 
 
