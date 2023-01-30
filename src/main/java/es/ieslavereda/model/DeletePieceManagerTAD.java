@@ -2,12 +2,10 @@ package es.ieslavereda.model;
 
 import es.ieslavereda.TAD.ListPiece;
 
-import java.util.List;
-
-public class DeletePieceManager implements IDeletePieceManager{
+public class DeletePieceManagerTAD implements IDeletePieceManager{
     private ListPiece listPiece;
 
-    public DeletePieceManager(){
+    public DeletePieceManagerTAD(){
         listPiece = new ListPiece();
     }
 

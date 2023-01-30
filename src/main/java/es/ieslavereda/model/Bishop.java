@@ -9,6 +9,12 @@ public abstract class Bishop extends Piece{
         super(type,celda);
     }
 
+
+    @Override
+    public ListCoordinate getNextMovements(){
+        return getNextMovementsAsBishop(this);
+    }
+
     public static ListCoordinate getNextMovementsAsBishop(Piece p){
         ListCoordinate listCoordinate = new ListCoordinate();
         Cordenada position = p.getCelda().getCordenada();
@@ -56,10 +62,7 @@ public abstract class Bishop extends Piece{
     }
 
 
-    @Override
-    public ListCoordinate getNextMovements(){
-        return getNextMovementsAsBishop(this);
-    }
+
 
 
 
