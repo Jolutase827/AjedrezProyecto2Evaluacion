@@ -6,5 +6,5 @@ public interface IDeletePieceManager {
 
     int count(Piece.Type pt);
 
-    Piece getLast();
+    Piece removeLast();
 }
