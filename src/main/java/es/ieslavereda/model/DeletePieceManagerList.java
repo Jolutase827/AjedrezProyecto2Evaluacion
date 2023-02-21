@@ -1,32 +1,39 @@
 package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
-import es.ieslavereda.TAD.ListDEPieces;
-import sun.font.DelegatingShape;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
-public class DeletePieceManagerDE implements IDeletePieceManager{
-    private ListDEPieces listDE;
 
-    public DeletePieceManagerDE(){
-        listDE = new ListDEPieces();
+public class DeletePieceManagerList implements IDeletePieceManager{
+    private List<Piece> list;
+
+    public DeletePieceManagerList(){
+        list = new LinkedList<>();
     }
 
     @Override
     public void addPiece(Piece p) {
-        listDE.addHead(p);
+        list.add(p);
     }
 
     @Override
     public int count(Piece.Type pt) {
-        return listDE.countTypeP(pt);
+        int i=0;
+        for (Piece p :list){
+            if (p.getType()==pt){
+                i++;
+            }
+        }
+        return i;
     }
 
     @Override
     public Piece removeLast() {
-        return listDE.removeHead();
+        return list.remove(0);
     }
-
 
     @Override
     public String toString() {

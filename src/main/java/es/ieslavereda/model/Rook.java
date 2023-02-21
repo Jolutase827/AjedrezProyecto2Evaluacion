@@ -1,6 +1,7 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Rook extends Piece {
 
@@ -8,8 +9,8 @@ public abstract class Rook extends Piece {
         super(type,celda);
     }
 
-    public static ListCoordinate getNextMovementsAsRook(Piece p) {
-        ListCoordinate listCordinates = new ListCoordinate();
+    public static Set<Cordenada> getNextMovementsAsRook(Piece p) {
+        Set<Cordenada> listCordinates = new HashSet<>();
         Cordenada posicion = p.getCelda().getCordenada();
         Tablero t = p.getCelda().getTablero();
         Cordenada c;
@@ -59,7 +60,7 @@ public abstract class Rook extends Piece {
     }
 
     @Override
-    public ListCoordinate getNextMovements() {
+    public Set<Cordenada> getNextMovements() {
         return getNextMovementsAsRook(this);
     }
 

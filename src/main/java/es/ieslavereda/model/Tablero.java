@@ -1,19 +1,19 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
+import java.util.*;
 
 public class Tablero {
-    private Celda[][] celdas;
+    private Map<Cordenada,Celda> celdas;
 
     private IDeletePieceManager deletePieceManager;
 
 
     public Tablero(){
-        this.deletePieceManager = new DeletePieceManagerDE();
-        celdas = new Celda[8][8];
-        for (int fila =0 ; fila<celdas.length; fila++)
-            for ( int columna =0 ; columna< celdas[fila].length;columna++)
-                celdas[fila][columna]= new Celda(this, new Cordenada((char)('A'+columna),1+fila));
+        this.deletePieceManager = new DeletePieceManagerList();
+        celdas = new LinkedHashMap<>();
+        for (int fila =0 ; fila<8; fila++)
+            for ( int columna =0 ; columna< 8;columna++)
+                celdas.put(new Cordenada((char)('A'+columna),1+fila),new Celda(this, new Cordenada((char)('A'+columna),1+fila)));
     }
 
     public void placePieces(){
@@ -40,24 +40,18 @@ public class Tablero {
     }
 
     public Celda getCelda(Cordenada cordenada){
-        if (cordenada.getFila()<1||cordenada.getFila()>8)
-            return null;
-        if (cordenada.getCol()<'A'||cordenada.getCol()>'H')
-            return null;
-        return celdas[cordenada.getFila()-1][cordenada.getCol()-'A'];
+        return celdas.get(cordenada);
     }
 
-    public void hightlight(ListCoordinate listCoordinate){
-
-        while(!listCoordinate.isEmpty()) {
-            getCelda(listCoordinate.remove(0)).highLight();
+    public void hightlight(Set<Cordenada> setcordenada){
+        List<Cordenada> listCordenada = new LinkedList<>(setcordenada);
+        for (Cordenada c : listCordenada){
+            getCelda(c).highLight();
         }
-
     }
 
     public void resetColors(){
-        for (Celda[] celdas1: celdas)
-            for (Celda c: celdas1)
+        for (Celda c : celdas.values())
                 c.resetColor();
     }
 
@@ -65,10 +59,10 @@ public class Tablero {
     public String toString(){
         String salida = "    A  B  C  D  E  F  G  H\n";
 
-        for (int i = 0; i<celdas.length;i++) {
+        for (int i = 0; i<8;i++) {
             salida += " " + (i + 1) + " ";
-            for (int j = 0; j <celdas[i].length; j++)
-                salida += celdas[i][j];
+            for (int j = 0; j <8; j++)
+                salida += celdas.get(new Cordenada((char)('A'+j),1+i));
             salida += " " + (i+1)+ "\n";
         }
 

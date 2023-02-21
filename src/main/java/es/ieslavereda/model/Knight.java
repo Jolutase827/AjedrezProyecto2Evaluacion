@@ -1,17 +1,18 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Knight extends Piece{
-    private ListCoordinate listCoordinate;
+    private Set<Cordenada> listCoordinate;
 
     public Knight(Type type, Celda celda){
         super(type,celda);
     }
 
     @Override
-    public ListCoordinate getNextMovements(){
-        listCoordinate = new ListCoordinate();
+    public Set<Cordenada> getNextMovements(){
+        listCoordinate = new HashSet<>();
         Cordenada position = getCelda().getCordenada();
         Cordenada c;
 

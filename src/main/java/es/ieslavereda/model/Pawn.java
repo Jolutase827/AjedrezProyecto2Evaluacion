@@ -1,9 +1,10 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Pawn extends Piece {
-    private ListCoordinate list;
+    private Set<Cordenada> list;
 
 
     public Pawn(Type type, Celda celda){
@@ -20,8 +21,8 @@ public abstract class Pawn extends Piece {
 
 
     @Override
-    public ListCoordinate getNextMovements() {
-        list = new ListCoordinate();
+    public Set<Cordenada> getNextMovements() {
+        list = new HashSet<>();
         getNextMovementsPawn();
         return list;
     }

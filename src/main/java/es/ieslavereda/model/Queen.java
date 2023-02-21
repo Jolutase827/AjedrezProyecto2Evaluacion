@@ -1,6 +1,6 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
+import java.util.Set;
 
 public abstract class Queen extends Piece{
     private Cordenada[] cordenadas;
@@ -10,9 +10,9 @@ public abstract class Queen extends Piece{
     }
 
     @Override
-    public ListCoordinate getNextMovements(){
-        ListCoordinate rookMovements = Rook.getNextMovementsAsRook(this);
-        ListCoordinate bishopMovements = Bishop.getNextMovementsAsBishop(this);
+    public Set<Cordenada> getNextMovements(){
+        Set<Cordenada> rookMovements = Rook.getNextMovementsAsRook(this);
+        Set<Cordenada> bishopMovements = Bishop.getNextMovementsAsBishop(this);
         rookMovements.addAll(bishopMovements);
         return rookMovements;
     }

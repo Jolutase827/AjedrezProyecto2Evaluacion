@@ -1,7 +1,6 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
-import javafx.scene.control.Cell;
+import java.util.Set;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 
@@ -44,7 +43,7 @@ public abstract class Piece {
     }
 
 
-    public abstract ListCoordinate getNextMovements();
+    public abstract Set<Cordenada> getNextMovements();
 
     @Override
     public String toString(){

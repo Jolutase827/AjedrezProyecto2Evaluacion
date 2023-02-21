@@ -52,6 +52,11 @@ public class Cordenada {
     }
 
     @Override
+    public int hashCode() {
+        return fila+col;
+    }
+
+    @Override
     public String toString(){
         return "("+col+","+fila+")";
     }

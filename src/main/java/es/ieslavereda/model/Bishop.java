@@ -1,6 +1,7 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListCoordinate;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Bishop extends Piece{
     private Cordenada[] cordenadas;
@@ -11,12 +12,12 @@ public abstract class Bishop extends Piece{
 
 
     @Override
-    public ListCoordinate getNextMovements(){
+    public Set<Cordenada> getNextMovements(){
         return getNextMovementsAsBishop(this);
     }
 
-    public static ListCoordinate getNextMovementsAsBishop(Piece p){
-        ListCoordinate listCoordinate = new ListCoordinate();
+    public static Set<Cordenada> getNextMovementsAsBishop(Piece p){
+        Set<Cordenada> listCoordinate = new HashSet<>();
         Cordenada position = p.getCelda().getCordenada();
         Tablero t = p.getCelda().getTablero();
         Cordenada c;
