@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Bishop extends Piece{
-    private Cordenada[] cordenadas;
 
     public Bishop(Type type, Celda celda){
         super(type,celda);

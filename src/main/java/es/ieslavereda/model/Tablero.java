@@ -14,6 +14,8 @@ public class Tablero {
         for (int fila =0 ; fila<8; fila++)
             for ( int columna =0 ; columna< 8;columna++)
                 celdas.put(new Cordenada((char)('A'+columna),1+fila),new Celda(this, new Cordenada((char)('A'+columna),1+fila)));
+
+        placePieces();
     }
 
     public void placePieces(){
@@ -53,6 +55,21 @@ public class Tablero {
     public void resetColors(){
         for (Celda c : celdas.values())
                 c.resetColor();
+    }
+
+    public boolean kingIsDead(){
+        return deletePieceManager.count(Piece.Type.WHITE_KING)>0||deletePieceManager.count(Piece.Type.BLACK_KING)>0;
+    }
+    public void movePiece(Cordenada cPiece, Cordenada cMovement){
+        Celda celdaPiece = getCelda(cPiece);
+        Celda celdaMovenet = getCelda(cMovement);
+        if (celdaPiece!=null&&celdaMovenet!=null){
+            if (!celdaPiece.isEmpty()){
+                if (!celdaMovenet.isEmpty())
+                    deletePieceManager.addPiece(celdaMovenet.getPiece());
+                celdaPiece.getPiece().moveTo(cMovement);
+            }
+        }
     }
 
     @Override

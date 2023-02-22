@@ -3,10 +3,20 @@ package es.ieslavereda.model;
 public class Jugador {
     private String nombre;
     private Tablero tablero;
+    private Color color;
 
-    public Jugador(String nombre,Tablero tablero){
+    public Jugador(String nombre,Tablero tablero, Color color){
         this.nombre = nombre;
         this.tablero = tablero;
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     @Override
@@ -18,7 +28,7 @@ public class Jugador {
     public boolean equals(Object obj){
         if (obj instanceof Jugador){
             Jugador j1 = (Jugador) obj;
-            return nombre.equals(nombre);
+            return j1.nombre.equals(nombre)&&j1.color.equals(color);
         }
         return false;
     }

@@ -57,6 +57,10 @@ public class Celda {
         }
     }
 
+    public boolean isHighLight(){
+        return original==color;
+    }
+
     @Override
     public String toString(){
         if (isEmpty())
