@@ -40,9 +40,9 @@ public class Game {
             t.resetColors();
             System.out.println(t);
             if (turno.equals(j1.getColor())) {
-                System.out.println("Turno de " + j1.getNombre() + " que utiliza blancas");
+                System.out.println("Turno de " + j1.getNombre() + " que utiliza");
             } else {
-                System.out.println("Turno de " + j2.getNombre() + " que utiliza negras");
+                System.out.println("Turno de " + j2.getNombre() + " que utiliza");
             }
             cordenadaPiece = cordenadaSeleccionarPieza(t,turno);
             t.hightlight(t.getCelda(cordenadaPiece).getPiece().getNextMovements());
