@@ -58,7 +58,7 @@ public class Celda {
     }
 
     public boolean isHighLight(){
-        return original==color;
+        return original!=color;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package es.ieslavereda;
+package es.ieslavereda.entrada;
 
 import es.ieslavereda.model.Color;
 import es.ieslavereda.model.Jugador;

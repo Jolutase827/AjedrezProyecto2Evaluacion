@@ -1,12 +1,13 @@
-package es.ieslavereda;
+package es.ieslavereda.salida;
 
+import es.ieslavereda.entrada.Options;
+import es.ieslavereda.entrada.Tool;
 import es.ieslavereda.model.Color;
 import es.ieslavereda.model.Cordenada;
 import es.ieslavereda.model.Jugador;
 import es.ieslavereda.model.Tablero;
 
 import java.util.Scanner;
-import java.util.Set;
 
 public class Game {
     public static void start(){
@@ -40,9 +41,9 @@ public class Game {
             t.resetColors();
             System.out.println(t);
             if (turno.equals(j1.getColor())) {
-                System.out.println("Turno de " + j1.getNombre() + " que utiliza");
+                System.out.println("Turno de " + j1.getNombre() + " que utiliza -> "+j1.getColor());
             } else {
-                System.out.println("Turno de " + j2.getNombre() + " que utiliza");
+                System.out.println("Turno de " + j2.getNombre() + " que utiliza ->" + j2.getColor());
             }
             cordenadaPiece = cordenadaSeleccionarPieza(t,turno);
             t.hightlight(t.getCelda(cordenadaPiece).getPiece().getNextMovements());
@@ -65,6 +66,7 @@ public class Game {
         String aux = Tool.devuelveStringFormatoCelda(1);
         Cordenada cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         while (!Tool.comprobarPiezaMia(t,turno,cExit)){
+            aux = Tool.devuelveStringFormatoCelda(1);
             cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         }
         return cExit;
@@ -72,13 +74,17 @@ public class Game {
 
     public static Cordenada cordenadaMoverPieza(Tablero t){
         System.out.println("Donde quieres mover la pieza inserte la cordenada con formato (a1) o si quieres soltar la pieza pulsa c");
+        Cordenada cExit = null;
         String aux = Tool.devuelveStringFormatoCelda(2);
-        Cordenada cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
+        if (aux.length()==2)
+            cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         while (!Tool.comprobarCordenadaAptaMover(t,cExit)) {
             if (aux.compareToIgnoreCase("c") == 0) {
                 return null;
             }
-            cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
+            aux = Tool.devuelveStringFormatoCelda(2);
+            if (aux.length()==2)
+                cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         }
 
         return cExit;
