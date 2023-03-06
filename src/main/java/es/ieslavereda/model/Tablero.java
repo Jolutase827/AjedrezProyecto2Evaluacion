@@ -150,14 +150,13 @@ public class Tablero {
                 if (!celdaMovenet.isEmpty())
                     deletePieceManager.addPiece(celdaMovenet.getPiece());
                 else if (celdaPiece.getPiece() instanceof King) {
-                    if (cMovement == cPiece.left().left()) {
+                    if (cMovement.equals(cPiece.left().left())) {
                         getCelda(cMovement.left().left()).getPiece().moveTo(cPiece.left());
-                    } else if (cMovement == cPiece.right().right()) {
+                    } else if (cMovement.equals(cPiece.right().right())) {
                         getCelda(cMovement.right()).getPiece().moveTo(cPiece.right());
                     }
                 }
-                    celdaPiece.getPiece().moveTo(cMovement);
-
+                celdaPiece.getPiece().moveTo(cMovement);
             }
         }
     }
