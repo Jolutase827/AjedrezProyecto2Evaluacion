@@ -23,6 +23,18 @@ public class Celda {
         }
         this.color = original;
     }
+    public Celda(Tablero tablero, Cordenada cordenada,Piece p) {
+        this.cordenada = cordenada;
+        this.tablero = tablero;
+        this.piece = null;
+        if((cordenada.getFila()-1 + cordenada.getCol() - 'A')%2==0){
+            original = Color.WHITE_CELL;
+        }else {
+            original = Color.BLACK_CELL;
+        }
+        this.color = original;
+        piece = p;
+    }
 
     public Tablero getTablero(){
         return tablero;
@@ -52,9 +64,14 @@ public class Celda {
                 color = Color.HIGHLIGHT_WHITE;
             else
                 color = Color.HIGHLIGHT_BLACK;
+
         }else {
-            color = (original == Color.BLACK_CELL)? Color.HIGHLIGHT_KILL_BLACK :Color.HIGHLIGHT_KILL_WHITE;
+                color = (original == Color.BLACK_CELL)? Color.HIGHLIGHT_KILL_BLACK :Color.HIGHLIGHT_KILL_WHITE;
         }
+    }
+
+    public void hightLightHake(){
+        color = (original == Color.BLACK_CELL)? Color.HIGHLIGHT_JAKE_BLACK : Color.HIGHLIGHT_JAKE_WHITE;
     }
 
     public boolean isHighLight(){
@@ -70,7 +87,9 @@ public class Celda {
 
 
     public void resetColor(){
-        color = original;
+        if (!color.equals(Color.HIGHLIGHT_JAKE_BLACK)||!color.equals(Color.HIGHLIGHT_JAKE_WHITE)) {
+            color = original;
+        }
     }
     enum Color{
         WHITE_CELL(Attribute.BACK_COLOR(180, 180, 180)),
@@ -78,7 +97,9 @@ public class Celda {
         HIGHLIGHT_KILL_WHITE(Attribute.BACK_COLOR(180, 0, 0)),
         HIGHLIGHT_KILL_BLACK(Attribute.BACK_COLOR(130, 0, 0)),
         HIGHLIGHT_WHITE(Attribute.BACK_COLOR(180, 180, 0)),
-        HIGHLIGHT_BLACK(Attribute.BACK_COLOR(130, 130, 0));
+        HIGHLIGHT_BLACK(Attribute.BACK_COLOR(130, 130, 0)),
+        HIGHLIGHT_JAKE_WHITE(Attribute.BACK_COLOR(160, 0, 160)),
+        HIGHLIGHT_JAKE_BLACK(Attribute.BACK_COLOR(128, 0, 128));
 
         private Attribute attribute;
         Color(Attribute attribute){

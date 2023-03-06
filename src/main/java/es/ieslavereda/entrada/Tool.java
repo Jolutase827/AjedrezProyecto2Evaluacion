@@ -57,4 +57,12 @@ public class Tool {
 
         return false;
     }
+
+    public static Tablero inicioDeTurno(Color color,Tablero t){
+        t.resetColors();
+        if (t.oneColorJake(color)){
+            t.getCelda(t.getKingPosition(color)).hightLightHake();
+        }
+        return t;
+    }
 }

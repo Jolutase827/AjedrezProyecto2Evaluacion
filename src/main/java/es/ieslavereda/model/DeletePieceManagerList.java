@@ -37,7 +37,7 @@ public class DeletePieceManagerList implements IDeletePieceManager{
 
     @Override
     public String toString() {
-        String output="";
+        String output="                   DEAD PIECES\n      ";
         Piece.Type[] pts = Piece.Type.values();
         for (Piece.Type pt : pts){
             if (pt.getColor()==Color.WHITE){
@@ -46,12 +46,28 @@ public class DeletePieceManagerList implements IDeletePieceManager{
                 output += colorize(" "+pt.getShape()+" " , pt.getColor().getAttribute(),Attribute.BACK_COLOR(180, 180, 180));
             }
         }
-        output+="\n";
+        output+="\n      ";
         for (Piece.Type pt : pts){
             if (pt.getColor()==Color.BLACK){
                 output+= colorize(" "+count(pt)+" " ,pt.getColor().getAttribute(), Attribute.BACK_COLOR(100, 100, 100));
             }else {
                 output += colorize(" "+count(pt)+" ",pt.getColor().getAttribute() , Attribute.BACK_COLOR(180, 180, 180));
+            }
+        }
+        output+="\n\n                   LIVE PIECES\n      ";
+        for (Piece.Type pt : pts){
+            if (pt.getColor()==Color.WHITE){
+                output+= colorize(" "+pt.getShape()+" " ,pt.getColor().getAttribute(), Attribute.BACK_COLOR(100, 100, 100));
+            }else {
+                output += colorize(" "+pt.getShape()+" " , pt.getColor().getAttribute(),Attribute.BACK_COLOR(180, 180, 180));
+            }
+        }
+        output+="\n      ";
+        for (Piece.Type pt : pts){
+            if (pt.getColor()==Color.BLACK){
+                output+= colorize(" "+(((pt.equals(Piece.Type.BLACK_KING)||pt.equals(Piece.Type.BLACK_QUEEN))?1:(pt.equals(Piece.Type.BLACK_PAWN))?8:2)-count(pt))+" " ,pt.getColor().getAttribute(), Attribute.BACK_COLOR(100, 100, 100));
+            }else {
+                output += colorize(" "+(((pt.equals(Piece.Type.WHITE_KING)||pt.equals(Piece.Type.WHITE_QUEEN))?1:(pt.equals(Piece.Type.WHITE_PAWN))?8:2)-count(pt))+" ",pt.getColor().getAttribute() , Attribute.BACK_COLOR(180, 180, 180));
             }
         }
 

@@ -1,5 +1,6 @@
 package es.ieslavereda.model;
 
+
 import java.util.*;
 
 public class Tablero {
@@ -33,7 +34,7 @@ public class Tablero {
         new BlackBishop(getCelda(new Cordenada('F',1)));
         new WhiteQueen(getCelda(new Cordenada('D',8)));
         new BlackQueen(getCelda(new Cordenada('D',1)));
-        new WhiteKing(getCelda(new Cordenada('E',3)));
+        new WhiteKing(getCelda(new Cordenada('E',8)));
         new BlackKing(getCelda(new Cordenada('E',1)));
         for (int i = 0; i<8; i++) {
             new BlackPawn(getCelda(new Cordenada((char)('A'+i), 2)));
@@ -44,6 +45,79 @@ public class Tablero {
     public Celda getCelda(Cordenada cordenada){
         return celdas.get(cordenada);
     }
+
+
+    public boolean oneColorJakeMate(Color color){
+            return movementsValid(color).size()==0;
+    }
+
+    public Set<Cordenada> movementsValid(Color color){
+        Set<Cordenada> cordenadas= new HashSet<>();
+        for (Cordenada c : celdas.keySet()){
+            if (!getCelda(c).isEmpty())
+                if (getCelda(c).getPiece().getType().getColor().equals(color))
+                    cordenadas.addAll(movementsSalveKing(c,color));
+        }
+        return cordenadas;
+    }
+
+
+    public Set<Cordenada> movementsSalveKing(Cordenada c,Color color){
+        Set<Cordenada> cordenadasExit = new HashSet<>();
+        List<Piece> l = allPiecesInGame();
+        for (Cordenada aux : getCelda(c).getPiece().getNextMovements()){
+            getCelda(c).getPiece().moveTo(aux);
+            if (!oneColorJake(color))
+                cordenadasExit.add(aux);
+            resetMovement(l);
+        }
+        return cordenadasExit;
+    }
+
+    public void resetMovement(List<Piece> list){
+        List<Piece> l = new ArrayList<>(list);
+        for (Piece p : l){
+            p.putInYourPlace();
+        }
+    }
+
+    public List<Piece> allPiecesInGame(){
+        List<Piece> listPiece = new LinkedList<>();
+        for (Cordenada c: celdas.keySet()){
+            if (getCelda(c).isEmpty()) {
+                listPiece.add(getCelda(c).getPiece());
+            }
+        }
+        return listPiece;
+    }
+
+    public  boolean oneColorJake(Color color){
+        return getAllOneColorMovements(color.next()).contains(getKingPosition(color));
+    }
+
+
+    public Set<Cordenada> getAllOneColorMovements(Color color){
+        Set<Cordenada> exit = new HashSet<>();
+        for (Cordenada c: celdas.keySet()){
+            if (!getCelda(c).isEmpty())
+                if (getCelda(c).getPiece().getType().getColor().equals(color))
+                    exit.addAll(getCelda(c).getPiece().getNextMovements());
+
+        }
+        return exit;
+    }
+
+
+    public Cordenada getKingPosition(Color color){
+        for (Cordenada c : celdas.keySet()){
+            if (!getCelda(c).isEmpty())
+                if (getCelda(c).getPiece().getType().getShape() == '♚' && getCelda(c).getPiece().getType().getColor().equals(color))
+                    return c;
+        }
+        return null;
+    }
+
+
 
     public void hightlight(Set<Cordenada> setcordenada){
         List<Cordenada> listCordenada = new LinkedList<>(setcordenada);
@@ -74,16 +148,16 @@ public class Tablero {
 
     @Override
     public String toString(){
-        String salida = "    A  B  C  D  E  F  G  H\n";
+        String salida = "            A  B  C  D  E  F  G  H\n";
 
         for (int i = 0; i<8;i++) {
-            salida += " " + (i + 1) + " ";
+            salida += "         " + (i + 1) + " ";
             for (int j = 0; j <8; j++)
                 salida += celdas.get(new Cordenada((char)('A'+j),1+i));
             salida += " " + (i+1)+ "\n";
         }
 
-        salida += "    A  B  C  D  E  F  G  H\n\n" + deletePieceManager;
+        salida += "            A  B  C  D  E  F  G  H\n\n\n" + deletePieceManager;
 
 
         return salida;

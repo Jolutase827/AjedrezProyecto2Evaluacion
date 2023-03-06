@@ -37,8 +37,8 @@ public class Game {
         Cordenada cordenadaPiece;
         Cordenada cordenadaMove;
         System.out.println("Empieza el juego");
-        while (!finishGame(t)) {
-            t.resetColors();
+        while (!finishGame(t,turno)) {
+            t = Tool.inicioDeTurno(turno,t);
             System.out.println(t);
             if (turno.equals(j1.getColor())) {
                 System.out.println("Turno de " + j1.getNombre() + " que utiliza -> "+j1.getColor());
@@ -57,8 +57,8 @@ public class Game {
         }
     }
 
-    private static boolean finishGame(Tablero t) {
-        return t.kingIsDead();
+    private static boolean finishGame(Tablero t,Color turno) {
+        return t.oneColorJakeMate(turno);
     }
 
     public static Cordenada cordenadaSeleccionarPieza(Tablero t,Color turno){
