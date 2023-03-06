@@ -22,19 +22,19 @@ public class Tablero {
     public void placePieces(){
         new BlackKnight(getCelda(new Cordenada('G',1)));
         new BlackKnight(getCelda(new Cordenada('B',1)));
-//        new WhiteKnight(getCelda(new Cordenada('B',8)));
-//        new WhiteKnight(getCelda(new Cordenada('G',8)));
+        new WhiteKnight(getCelda(new Cordenada('B',8)));
+        new WhiteKnight(getCelda(new Cordenada('G',8)));
         new WhiteRook(getCelda(new Cordenada('H',8)));
         new WhiteRook(getCelda(new Cordenada('A',8)));
         new BlackRook(getCelda(new Cordenada('A',1)));
         new BlackRook(getCelda(new Cordenada('H',1)));
-//        new WhiteBishop(getCelda(new Cordenada('C',8)));
-//        new WhiteBishop(getCelda(new Cordenada('F',8)));
+        new WhiteBishop(getCelda(new Cordenada('C',8)));
+        new WhiteBishop(getCelda(new Cordenada('F',8)));
         new BlackBishop(getCelda(new Cordenada('C',1)));
         new BlackBishop(getCelda(new Cordenada('F',1)));
-//        new WhiteQueen(getCelda(new Cordenada('D',8)));
+        new WhiteQueen(getCelda(new Cordenada('D',8)));
         new BlackQueen(getCelda(new Cordenada('D',1)));
-        new WhiteKing(getCelda(new Cordenada('E',8)));
+        new WhiteKing(getCelda(new Cordenada('E',3)));
         new BlackKing(getCelda(new Cordenada('E',1)));
         for (int i = 0; i<8; i++) {
             new BlackPawn(getCelda(new Cordenada((char)('A'+i), 2)));

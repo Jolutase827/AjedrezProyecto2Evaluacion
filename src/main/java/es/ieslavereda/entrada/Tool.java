@@ -38,7 +38,7 @@ public class Tool {
                 if (t.movementsValid(c).contains(cExit))
                     return true;
                 else
-                    System.out.println("Error 1.6: SI MUEVES ESTA PIEZA TE PUEDEN HACER JAQUE");
+                    System.out.println("Error 1.6: SI MUEVES ESTA PIEZA TE PUEDEN MATAR AL REY");
             else
                 System.out.println("ERROR 1.5:LA PIEZA NO PUEDE REALIZAR ESE MOVIMIENTO");
         else
@@ -52,9 +52,12 @@ public class Tool {
             if (!t.getCelda(cExit).isEmpty())
                 if (t.getCelda(cExit).getPiece().getColor()==turno)
                     if (t.getCelda(cExit).getPiece().getNextMovements().size()>0)
-                        return true;
+                        if (t.piecesSalveKing(cExit,turno).contains(cExit))
+                            return true;
+                        else
+                            System.out.println("Error 1.6: NO PUEDES MOVER ESTA PIEZA PORQUE SI NO MATAN A TU REY");
                     else
-                        System.out.println("Error 1.5 La pieza no se puede mover");
+                        System.out.println("Error 1.5: LA PIEZA NO TIENE MOVIMIENTOS");
                 else
                     System.out.println("ERROR 1.4: LA PIEZA NO ES DE TU COLOR");
             else
