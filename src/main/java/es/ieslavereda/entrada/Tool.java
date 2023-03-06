@@ -8,11 +8,20 @@ import javax.print.DocFlavor;
 import java.util.Scanner;
 
 public class Tool {
+
+    /**
+     * Method that clean all the display through a for that print 40 enter
+     */
     public static void borrar(){
         for (int i =0; i<40;i++)
             System.out.println();
     }
 
+    /**
+     * Method to obtain for the user a good data of coordinate in format String
+     * @param i This variable, I use for know what format I need because if the user wants to drop a piece that the program admits the letter 'C' to drop it
+     * @return A valid coordinate or a C to drop the piece
+     */
     public static String devuelveStringFormatoCelda(int i){
         Scanner sc = new Scanner(System.in);
         String exit = sc.nextLine();
@@ -32,13 +41,24 @@ public class Tool {
         return exit;
     }
 
+    /**
+     *  Check if the move to the coordinate that the user give to us is valid
+     *
+     * @param t Board that we are playing
+     * @param cExit Coordinate to move the piece
+     * @param c Color of the turn
+     * @return Return <ul>
+     *                      <li>True: When the coordinate can move to this place</li>
+     *                      <li>False: When the coordinate can't move</li>
+     *                </ul>
+     */
     public static boolean comprobarCordenadaAptaMover(Tablero t, Cordenada cExit,Color c) {
         if (t.getCelda(cExit)!=null)
             if (t.getCelda(cExit).isHighLight())
                 if (t.movementsValid(c).contains(cExit))
                     return true;
                 else
-                    System.out.println("Error 1.6: SI MUEVES ESTA PIEZA TE PUEDEN MATAR AL REY");
+                    System.out.println("Error 1.6: SI MUEVES A ESA CORDENADA LA PIEZA TE PUEDEN MATAR AL REY");
             else
                 System.out.println("ERROR 1.5:LA PIEZA NO PUEDE REALIZAR ESE MOVIMIENTO");
         else
@@ -47,6 +67,17 @@ public class Tool {
         return false;
     }
 
+    /**
+     * Check if the move to the coordinate that the user give to us is valid
+     *
+     * @param t Board that we are playing
+     * @param turno Color of the turn
+     * @param cExit Color of the turn
+     * @return Return <ul>
+     *                          <li>True: When the coordinate can be select</li>
+     *                          <li>False: When the coordinate can't be select</li>
+     *                    </ul>
+     */
     public static boolean comprobarPiezaMia(Tablero t, Color turno, Cordenada cExit) {
         if (t.getCelda(cExit)!=null)
             if (!t.getCelda(cExit).isEmpty())
@@ -68,6 +99,12 @@ public class Tool {
         return false;
     }
 
+    /**
+     * Reset the colors of all cells and hightlight the king if there are in check
+     * @param color The colour of the player that is playing
+     * @param t The board
+     * @return Board clean
+     */
     public static Tablero inicioDeTurno(Color color,Tablero t){
         t.resetColors();
         if (t.oneColorJake(color)){

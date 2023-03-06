@@ -10,6 +10,9 @@ import es.ieslavereda.model.Tablero;
 import java.util.Scanner;
 
 public class Game {
+    /**
+     * Start the game and initialize the players and the board;
+     */
     public static void start(){
         Scanner sc = new Scanner(System.in);
         Tablero t;
@@ -32,6 +35,12 @@ public class Game {
         System.out.println("QUE MALOS SOIS LOS DOS MIRA QUE OS CUESTA JAJAJAJAJAJAJA");
     }
 
+    /**
+     * Initialize one match
+     * @param t Board game
+     * @param j1 Player one
+     * @param j2 Player two
+     */
     public static void startMatch(Tablero t, Jugador j1, Jugador j2){
         Color turno = Color.WHITE;
         Cordenada cordenadaPiece;
@@ -57,10 +66,27 @@ public class Game {
         }
     }
 
+    /**
+     * Check if the game is finish
+     *
+     * @param t Board game
+     * @param turno Turn color
+     * @return <ul>
+     *     <li>True: When the king is in check-mate</li>
+     *     <li>False: When the king isn't in check-mate</li>
+     * </ul>
+     */
     private static boolean finishGame(Tablero t,Color turno) {
         return t.oneColorJakeMate(turno);
     }
 
+
+    /**
+     *
+     * @param t Board game
+     * @param turno Turn color
+     * @return Coordinate of the piece that the user select
+     */
     public static Cordenada cordenadaSeleccionarPieza(Tablero t,Color turno){
         System.out.println("Dime que ficha quieres mover con este formato (a1)");
         String aux = Tool.devuelveStringFormatoCelda(1);
