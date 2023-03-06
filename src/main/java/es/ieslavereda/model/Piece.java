@@ -9,15 +9,19 @@ public abstract class Piece {
     private Type type;
     private Celda celda;
 
+    private boolean move;
+
     public Piece(Type shape, Celda celda){
         this.type =shape;
         this.celda = celda;
+        move = false;
         putInYourPlace();
     }
 
     public void moveTo(Cordenada cordenada){
         Tablero t = getCelda().getTablero();
         if (t.getCelda(cordenada)!=null){
+            move = true;
             getCelda().setPiece(null);
             Celda celda = t.getCelda(cordenada);
             celda.setPiece(this);
@@ -25,6 +29,16 @@ public abstract class Piece {
         }
     }
 
+    public void falseMoveto(Cordenada cordenada){
+        Tablero t = getCelda().getTablero();
+        if (t.getCelda(cordenada)!=null){
+            move = true;
+            getCelda().setPiece(null);
+            Celda celda = t.getCelda(cordenada);
+            celda.setPiece(this);
+            this.celda = celda;
+        }
+    }
 
     public Type getType() {
         return type;
@@ -33,6 +47,8 @@ public abstract class Piece {
     public Celda getCelda(){
         return celda;
     }
+
+
 
     public Color getColor(){
         return type.color;

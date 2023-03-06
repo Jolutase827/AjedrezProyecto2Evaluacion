@@ -23,6 +23,7 @@ public class Tool {
                 valido = exit.length()==2;
             else
                 valido = (exit.length()==2||exit.compareToIgnoreCase("c")==0);
+
             if (!valido) {
                 System.out.println((i == 1) ? "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1" : "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA");
                 exit = sc.nextLine();
@@ -31,15 +32,18 @@ public class Tool {
         return exit;
     }
 
-    public static boolean comprobarCordenadaAptaMover(Tablero t, Cordenada cExit) {
-        if (t.getCelda(cExit)!=null){
-            if (t.getCelda(cExit).isHighLight()){
-                return true;
-            }
-            System.out.println("ERROR 1.5:LA PIEZA NO PUEDE REALIZAR ESE MOVIMIENTO");
-        }else {
+    public static boolean comprobarCordenadaAptaMover(Tablero t, Cordenada cExit,Color c) {
+        if (t.getCelda(cExit)!=null)
+            if (t.getCelda(cExit).isHighLight())
+                if (t.movementsValid(c).contains(cExit))
+                    return true;
+                else
+                    System.out.println("Error 1.6: SI MUEVES ESTA PIEZA TE PUEDEN HACER JAQUE");
+            else
+                System.out.println("ERROR 1.5:LA PIEZA NO PUEDE REALIZAR ESE MOVIMIENTO");
+        else
             System.out.println("ERROR 1.2: LA CORDENADA NO ESTA EN FORMATO (a1) O LOS VALORES NO SON DE LA 'A' A LA 'H' O DEL '1' AL '8'");
-        }
+
         return false;
     }
 
@@ -47,7 +51,10 @@ public class Tool {
         if (t.getCelda(cExit)!=null)
             if (!t.getCelda(cExit).isEmpty())
                 if (t.getCelda(cExit).getPiece().getColor()==turno)
-                    return true;
+                    if (t.getCelda(cExit).getPiece().getNextMovements().size()>0)
+                        return true;
+                    else
+                        System.out.println("Error 1.5 La pieza no se puede mover");
                 else
                     System.out.println("ERROR 1.4: LA PIEZA NO ES DE TU COLOR");
             else

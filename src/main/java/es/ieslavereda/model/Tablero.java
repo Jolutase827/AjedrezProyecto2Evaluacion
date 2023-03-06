@@ -34,7 +34,7 @@ public class Tablero {
         new BlackBishop(getCelda(new Cordenada('F',1)));
         new WhiteQueen(getCelda(new Cordenada('D',8)));
         new BlackQueen(getCelda(new Cordenada('D',1)));
-        new WhiteKing(getCelda(new Cordenada('E',8)));
+        new WhiteKing(getCelda(new Cordenada('E',3)));
         new BlackKing(getCelda(new Cordenada('E',1)));
         for (int i = 0; i<8; i++) {
             new BlackPawn(getCelda(new Cordenada((char)('A'+i), 2)));
@@ -64,21 +64,38 @@ public class Tablero {
 
     public Set<Cordenada> movementsSalveKing(Cordenada c,Color color){
         Set<Cordenada> cordenadasExit = new HashSet<>();
-        List<Piece> l = allPiecesInGame();
+        Piece p;
         for (Cordenada aux : getCelda(c).getPiece().getNextMovements()){
-            getCelda(c).getPiece().moveTo(aux);
+            p=null;
+            if (!getCelda(aux).isEmpty())
+                p = getCelda(aux).getPiece();
+            getCelda(c).getPiece().falseMoveto(aux);
             if (!oneColorJake(color))
                 cordenadasExit.add(aux);
-            resetMovement(l);
+            resetMovement(c,aux,p);
         }
         return cordenadasExit;
     }
 
-    public void resetMovement(List<Piece> list){
-        List<Piece> l = new ArrayList<>(list);
-        for (Piece p : l){
-            p.putInYourPlace();
+    public Set<Cordenada> piecesSalveKing(Cordenada c,Color color){
+        Set<Cordenada> cordenadasExit = new HashSet<>();
+        Piece p;
+        for (Cordenada aux : getCelda(c).getPiece().getNextMovements()){
+            p=null;
+            if (!getCelda(aux).isEmpty())
+                p = getCelda(aux).getPiece();
+            getCelda(c).getPiece().falseMoveto(aux);
+            if (!oneColorJake(color))
+                cordenadasExit.add(c);
+            resetMovement(c,aux,p);
         }
+        return cordenadasExit;
+    }
+
+    public void resetMovement(Cordenada retorno, Cordenada movida,Piece p){
+        getCelda(movida).getPiece().falseMoveto(retorno);
+        if (p!=null)
+            p.putInYourPlace();
     }
 
     public List<Piece> allPiecesInGame(){

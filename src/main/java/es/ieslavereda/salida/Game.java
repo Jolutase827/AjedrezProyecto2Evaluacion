@@ -49,7 +49,7 @@ public class Game {
             t.hightlight(t.getCelda(cordenadaPiece).getPiece().getNextMovements());
             Tool.borrar();
             System.out.println(t);
-            cordenadaMove = cordenadaMoverPieza(t);
+            cordenadaMove = cordenadaMoverPieza(t,turno);
             if (cordenadaMove!=null) {
                 t.movePiece(cordenadaPiece, cordenadaMove);
                 turno = turno.next();
@@ -72,19 +72,19 @@ public class Game {
         return cExit;
     }
 
-    public static Cordenada cordenadaMoverPieza(Tablero t){
+    public static Cordenada cordenadaMoverPieza(Tablero t,Color color){
         System.out.println("Donde quieres mover la pieza inserte la cordenada con formato (a1) o si quieres soltar la pieza pulsa c");
         Cordenada cExit = null;
         String aux = Tool.devuelveStringFormatoCelda(2);
         if (aux.length()==2)
             cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
-        while (!Tool.comprobarCordenadaAptaMover(t,cExit)) {
-            if (aux.compareToIgnoreCase("c") == 0) {
-                return null;
-            }
+        while (!Tool.comprobarCordenadaAptaMover(t,cExit,color)) {
             aux = Tool.devuelveStringFormatoCelda(2);
             if (aux.length()==2)
                 cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
+            if (aux.compareToIgnoreCase("c") == 0) {
+                return null;
+            }
         }
 
         return cExit;
