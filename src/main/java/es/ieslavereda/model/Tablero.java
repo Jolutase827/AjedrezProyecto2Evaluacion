@@ -22,19 +22,19 @@ public class Tablero {
     public void placePieces(){
         new BlackKnight(getCelda(new Cordenada('G',1)));
         new BlackKnight(getCelda(new Cordenada('B',1)));
-        new WhiteKnight(getCelda(new Cordenada('B',8)));
-        new WhiteKnight(getCelda(new Cordenada('G',8)));
+//        new WhiteKnight(getCelda(new Cordenada('B',8)));
+//        new WhiteKnight(getCelda(new Cordenada('G',8)));
         new WhiteRook(getCelda(new Cordenada('H',8)));
         new WhiteRook(getCelda(new Cordenada('A',8)));
         new BlackRook(getCelda(new Cordenada('A',1)));
         new BlackRook(getCelda(new Cordenada('H',1)));
-        new WhiteBishop(getCelda(new Cordenada('C',8)));
-        new WhiteBishop(getCelda(new Cordenada('F',8)));
+//        new WhiteBishop(getCelda(new Cordenada('C',8)));
+//        new WhiteBishop(getCelda(new Cordenada('F',8)));
         new BlackBishop(getCelda(new Cordenada('C',1)));
         new BlackBishop(getCelda(new Cordenada('F',1)));
-        new WhiteQueen(getCelda(new Cordenada('D',8)));
+//        new WhiteQueen(getCelda(new Cordenada('D',8)));
         new BlackQueen(getCelda(new Cordenada('D',1)));
-        new WhiteKing(getCelda(new Cordenada('E',3)));
+        new WhiteKing(getCelda(new Cordenada('E',8)));
         new BlackKing(getCelda(new Cordenada('E',1)));
         for (int i = 0; i<8; i++) {
             new BlackPawn(getCelda(new Cordenada((char)('A'+i), 2)));
@@ -98,15 +98,6 @@ public class Tablero {
             p.putInYourPlace();
     }
 
-    public List<Piece> allPiecesInGame(){
-        List<Piece> listPiece = new LinkedList<>();
-        for (Cordenada c: celdas.keySet()){
-            if (getCelda(c).isEmpty()) {
-                listPiece.add(getCelda(c).getPiece());
-            }
-        }
-        return listPiece;
-    }
 
     public  boolean oneColorJake(Color color){
         return getAllOneColorMovements(color.next()).contains(getKingPosition(color));
@@ -151,14 +142,22 @@ public class Tablero {
     public boolean kingIsDead(){
         return deletePieceManager.count(Piece.Type.WHITE_KING)>0||deletePieceManager.count(Piece.Type.BLACK_KING)>0;
     }
-    public void movePiece(Cordenada cPiece, Cordenada cMovement){
+    public void movePiece(Cordenada cPiece, Cordenada cMovement) {
         Celda celdaPiece = getCelda(cPiece);
         Celda celdaMovenet = getCelda(cMovement);
-        if (celdaPiece!=null&&celdaMovenet!=null){
-            if (!celdaPiece.isEmpty()){
+        if (celdaPiece != null && celdaMovenet != null) {
+            if (!celdaPiece.isEmpty()) {
                 if (!celdaMovenet.isEmpty())
                     deletePieceManager.addPiece(celdaMovenet.getPiece());
-                celdaPiece.getPiece().moveTo(cMovement);
+                else if (celdaPiece.getPiece() instanceof King) {
+                    if (cMovement == cPiece.left().left()) {
+                        getCelda(cMovement.left().left()).getPiece().moveTo(cPiece.left());
+                    } else if (cMovement == cPiece.right().right()) {
+                        getCelda(cMovement.right()).getPiece().moveTo(cPiece.right());
+                    }
+                }
+                    celdaPiece.getPiece().moveTo(cMovement);
+
             }
         }
     }

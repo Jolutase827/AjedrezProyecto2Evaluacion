@@ -46,6 +46,12 @@ public abstract class King extends Piece{
         c = position.right();
         check(c);
 
+        c = position.left().left();
+        checkEnroqueLeft(c);
+
+        c = position.right().right();
+        checkEnroqueRight(c);
+
         return listCoordinate;
     }
 
@@ -57,5 +63,27 @@ public abstract class King extends Piece{
             else if (t.getCelda(c).getPiece().getColor()!=getColor())
                 listCoordinate.add(c);
         }
+    }
+
+    private void checkEnroqueLeft(Cordenada c) {
+        Tablero t = getCelda().getTablero();
+        if (!isMove())
+            if (t.getCelda(c).isEmpty() && t.getCelda(c.right()).isEmpty() && t.getCelda(c.left()).isEmpty())
+                if (!t.getCelda(c.left().left()).isEmpty())
+                    if (t.getCelda(c.left().left()).getPiece() instanceof Rook)
+                        if (!t.getCelda(c.left().left()).getPiece().isMove())
+                            listCoordinate.add(c);
+
+    }
+
+    private void checkEnroqueRight(Cordenada c){
+        Tablero t = getCelda().getTablero();
+        if (!isMove())
+            if (t.getCelda(c).isEmpty() && t.getCelda(c.left()).isEmpty())
+                if (!t.getCelda(c.right()).isEmpty())
+                    if (t.getCelda(c.right()).getPiece() instanceof Rook)
+                        if (!t.getCelda(c.right()).getPiece().isMove())
+                            listCoordinate.add(c);
+
     }
 }

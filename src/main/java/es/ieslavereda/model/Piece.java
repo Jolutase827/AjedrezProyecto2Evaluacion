@@ -29,10 +29,13 @@ public abstract class Piece {
         }
     }
 
+    public boolean isMove(){
+        return move;
+    }
+
     public void falseMoveto(Cordenada cordenada){
         Tablero t = getCelda().getTablero();
         if (t.getCelda(cordenada)!=null){
-            move = true;
             getCelda().setPiece(null);
             Celda celda = t.getCelda(cordenada);
             celda.setPiece(this);
