@@ -12,9 +12,11 @@ import static com.diogonunes.jcolor.Ansi.colorize;
  * @author José Luis Tárraga
  */
 public class Options {
+    /**
+     * Create board
+     * @return Board with the characteristic that the user want;
+     */
     public static Tablero menuTablero(){
-        Jugador j1;
-        Jugador j2;
         String opcion = "";
         System.out.println("Selecciona que quieres hacer: ");
         System.out.println("[1] Cargar partida");
@@ -25,6 +27,11 @@ public class Options {
     }
 
 
+    /**
+     * Ejecuta lo que el usuario ha colocado
+     * @param opcion the option that the user want
+     * @return Un tablero con las características que
+     */
     public static Tablero hacer(String opcion){
         if (opcion.equals("1"))
             return new Tablero();
