@@ -30,7 +30,7 @@ public class Options {
     /**
      * Ejecuta lo que el usuario ha colocado
      * @param opcion the option that the user want
-     * @return Un tablero con las características que
+     * @return Un tablero con las características que el usuario quiere
      */
     public static Tablero hacer(String opcion){
         if (opcion.equals("1"))
