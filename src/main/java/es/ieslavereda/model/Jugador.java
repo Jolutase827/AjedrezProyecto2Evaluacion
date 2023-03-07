@@ -1,5 +1,7 @@
 package es.ieslavereda.model;
-
+/**
+ * @author José Luis Tárraga
+ */
 public class Jugador {
     private String nombre;
     private Tablero tablero;

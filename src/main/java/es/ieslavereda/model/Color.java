@@ -1,7 +1,9 @@
 package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
-
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public enum Color {
     BLACK(Attribute.BLACK_TEXT()),
     WHITE(Attribute.TEXT_COLOR(255,255,255));

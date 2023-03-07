@@ -3,6 +3,9 @@ package es.ieslavereda.model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public abstract class Rook extends Piece {
 
     public Rook(Type type,Celda celda){

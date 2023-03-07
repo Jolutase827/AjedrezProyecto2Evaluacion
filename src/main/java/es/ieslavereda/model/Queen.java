@@ -2,6 +2,9 @@ package es.ieslavereda.model;
 
 import java.util.Set;
 
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public abstract class Queen extends Piece{
     private Cordenada[] cordenadas;
 

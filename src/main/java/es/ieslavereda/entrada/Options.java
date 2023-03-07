@@ -8,7 +8,9 @@ import java.util.Scanner;
 import java.util.Set;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
-
+/**
+ * @author José Luis Tárraga
+ */
 public class Options {
     public static Tablero menuTablero(){
         Jugador j1;

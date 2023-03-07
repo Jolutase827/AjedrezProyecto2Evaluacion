@@ -7,6 +7,10 @@ import java.util.List;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 
+
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public class DeletePieceManagerList implements IDeletePieceManager{
     private List<Piece> list;
 

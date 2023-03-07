@@ -9,6 +9,9 @@ import es.ieslavereda.model.Tablero;
 
 import java.util.Scanner;
 
+/**
+ * @author José Luis Tárraga
+ */
 public class Game {
     /**
      * Start the game and initialize the players and the board;

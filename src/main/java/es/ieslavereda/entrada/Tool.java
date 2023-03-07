@@ -7,6 +7,9 @@ import es.ieslavereda.model.Tablero;
 import javax.print.DocFlavor;
 import java.util.Scanner;
 
+/**
+ * @author José Luis Tárraga
+ */
 public class Tool {
 
     /**

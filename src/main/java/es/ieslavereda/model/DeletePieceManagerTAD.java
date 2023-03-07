@@ -4,6 +4,10 @@ import com.diogonunes.jcolor.Attribute;
 import es.ieslavereda.TAD.ListDEPieces;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
+
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public class DeletePieceManagerTAD implements IDeletePieceManager{
     private ListDEPieces listDE;
 

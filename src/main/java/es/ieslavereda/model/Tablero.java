@@ -3,7 +3,11 @@ package es.ieslavereda.model;
 
 import java.util.*;
 
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public class Tablero {
+
     private Map<Cordenada,Celda> celdas;
 
     private IDeletePieceManager deletePieceManager;

@@ -2,7 +2,9 @@ package es.ieslavereda.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public abstract class Pawn extends Piece {
     private Set<Cordenada> list;
 

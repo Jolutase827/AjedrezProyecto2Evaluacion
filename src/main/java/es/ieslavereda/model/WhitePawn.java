@@ -1,5 +1,7 @@
 package es.ieslavereda.model;
-
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public final class WhitePawn extends Pawn {
 
 

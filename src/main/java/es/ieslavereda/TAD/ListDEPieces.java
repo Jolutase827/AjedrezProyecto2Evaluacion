@@ -5,6 +5,9 @@ import es.ieslavereda.model.Piece;
 
 import es.ieslavereda.model.Piece;
 
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public class ListDEPieces {
     private int size;
 

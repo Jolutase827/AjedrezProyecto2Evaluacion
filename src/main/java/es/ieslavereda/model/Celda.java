@@ -4,6 +4,9 @@ import com.diogonunes.jcolor.Attribute;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 
+/**
+ * @author José Luis Tárraga, Feat Joaquin
+ */
 public class Celda {
     private Piece piece;
 
