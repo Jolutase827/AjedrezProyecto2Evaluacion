@@ -82,6 +82,7 @@ public class Game {
 
 
     /**
+     * Answer to user what piece want to move
      *
      * @param t Board game
      * @param turno Turn color
@@ -98,6 +99,12 @@ public class Game {
         return cExit;
     }
 
+    /**
+     * Answer to user where move the piece
+     * @param t Board game
+     * @param color Turn color
+     * @return Coordinate where the user want to move the token
+     */
     public static Cordenada cordenadaMoverPieza(Tablero t,Color color){
         System.out.println("Donde quieres mover la pieza inserte la cordenada con formato (a1) o si quieres soltar la pieza pulsa c");
         Cordenada cExit = null;
