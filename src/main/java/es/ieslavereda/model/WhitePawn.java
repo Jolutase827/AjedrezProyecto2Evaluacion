@@ -8,6 +8,10 @@ import java.io.Serializable;
 public final class WhitePawn extends Pawn implements Serializable {
 
 
+    /**
+     * Constructor WhitePawn
+     * @param celda Celda en la que va a ir la pieza
+     */
     public WhitePawn(Celda celda){
         super(Type.WHITE_PAWN,celda);
     }

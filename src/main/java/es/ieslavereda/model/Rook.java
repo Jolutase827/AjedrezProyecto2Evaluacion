@@ -9,6 +9,7 @@ import java.util.Set;
  */
 public abstract class Rook extends Piece implements Serializable {
 
+
     public Rook(Type type,Celda celda){
         super(type,celda);
     }
