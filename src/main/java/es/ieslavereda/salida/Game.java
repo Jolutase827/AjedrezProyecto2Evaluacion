@@ -34,8 +34,8 @@ public class Game {
             j2 = Options.menuJugador(j1,t);
             Tool.borrar();
             startMatch(t,j1,j2);
+            System.out.println("QUE MALOS SOIS LOS DOS MIRA QUE OS CUESTA JAJAJAJAJAJAJA");
         }
-        System.out.println("QUE MALOS SOIS LOS DOS MIRA QUE OS CUESTA JAJAJAJAJAJAJA");
     }
 
     /**
@@ -48,8 +48,9 @@ public class Game {
         Color turno = Color.WHITE;
         Cordenada cordenadaPiece;
         Cordenada cordenadaMove;
+        String valorDeOpciones = "3";
         System.out.println("Empieza el juego");
-        while (!finishGame(t,turno)) {
+        while (!finishGame(t,turno,valorDeOpciones)) {
             t = Tool.inicioDeTurno(turno,t);
             System.out.println(t);
             if (turno.equals(j1.getColor())) {
@@ -58,14 +59,17 @@ public class Game {
                 System.out.println("Turno de " + j2.getNombre() + " que utiliza ->" + j2.getColor());
             }
             cordenadaPiece = cordenadaSeleccionarPieza(t,turno);
-            t.hightlight(t.getCelda(cordenadaPiece).getPiece().getNextMovements());
-            Tool.borrar();
-            System.out.println(t);
-            cordenadaMove = cordenadaMoverPieza(t,turno);
-            if (cordenadaMove!=null) {
-                t.movePiece(cordenadaPiece, cordenadaMove);
-                turno = turno.next();
-            }
+            if (cordenadaPiece!=null) {
+                t.hightlight(t.getCelda(cordenadaPiece).getPiece().getNextMovements());
+                Tool.borrar();
+                System.out.println(t);
+                cordenadaMove = cordenadaMoverPieza(t, turno);
+                if (cordenadaMove != null) {
+                    t.movePiece(cordenadaPiece, cordenadaMove);
+                    turno = turno.next();
+                }
+            }else
+                valorDeOpciones = Options.opcionesDePausa(t,j1,j2,turno);
         }
     }
 
@@ -79,8 +83,8 @@ public class Game {
      *     <li>False: When the king isn't in check-mate</li>
      * </ul>
      */
-    private static boolean finishGame(Tablero t,Color turno) {
-        return t.oneColorJakeMate(turno);
+    private static boolean finishGame(Tablero t,Color turno,String valorDeOpciones) {
+        return t.oneColorJakeMate(turno)||valorDeOpciones.equals("3");
     }
 
 
@@ -92,7 +96,7 @@ public class Game {
      * @return Coordinate of the piece that the user select
      */
     public static Cordenada cordenadaSeleccionarPieza(Tablero t,Color turno){
-        System.out.println("Dime que ficha quieres mover con este formato (a1)");
+        System.out.println("Dime que ficha quieres mover con este formato (a1) o pulsa C para pausar el Juego");
         String aux = Tool.devuelveStringFormatoCelda(1);
         Cordenada cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         while (!Tool.comprobarPiezaMia(t,turno,cExit)){

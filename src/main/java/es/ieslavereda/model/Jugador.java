@@ -1,8 +1,11 @@
 package es.ieslavereda.model;
+
+import java.io.Serializable;
+
 /**
  * @author José Luis Tárraga
  */
-public class Jugador {
+public class Jugador implements Serializable {
     private String nombre;
     private Tablero tablero;
     private Color color;

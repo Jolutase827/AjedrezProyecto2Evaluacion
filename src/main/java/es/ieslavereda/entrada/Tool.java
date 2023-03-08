@@ -31,13 +31,9 @@ public class Tool {
         boolean valido=false;
 
         while (!valido) {
-            if (i==1)
-                valido = exit.length()==2;
-            else
-                valido = (exit.length()==2||exit.compareToIgnoreCase("c")==0);
-
+            valido = (exit.length()==2||exit.compareToIgnoreCase("c")==0);
             if (!valido) {
-                System.out.println((i == 1) ? "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1" : "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA");
+                System.out.println((i == 1) ? "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1 o escriba C para ir a opciones" : "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA");
                 exit = sc.nextLine();
             }
         }

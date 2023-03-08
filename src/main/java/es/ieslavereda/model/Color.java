@@ -1,10 +1,13 @@
 package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
+
+import java.io.Serializable;
+
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public enum Color {
+public enum Color implements Serializable {
     BLACK(Attribute.BLACK_TEXT()),
     WHITE(Attribute.TEXT_COLOR(255,255,255));
 

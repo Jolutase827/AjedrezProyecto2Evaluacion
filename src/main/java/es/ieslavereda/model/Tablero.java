@@ -1,12 +1,13 @@
 package es.ieslavereda.model;
 
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public class Tablero {
+public class Tablero implements Serializable {
 
     private Map<Cordenada,Celda> celdas;
 
