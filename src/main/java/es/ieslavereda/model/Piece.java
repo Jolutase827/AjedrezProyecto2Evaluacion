@@ -1,5 +1,6 @@
 package es.ieslavereda.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
@@ -7,7 +8,7 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public abstract class Piece {
+public abstract class Piece implements Serializable {
     private Type type;
     private Celda celda;
 

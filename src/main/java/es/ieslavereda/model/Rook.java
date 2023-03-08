@@ -1,12 +1,13 @@
 package es.ieslavereda.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public abstract class Rook extends Piece {
+public abstract class Rook extends Piece implements Serializable {
 
     public Rook(Type type,Celda celda){
         super(type,celda);

@@ -1,11 +1,12 @@
 package es.ieslavereda.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public abstract class Bishop extends Piece{
+public abstract class Bishop extends Piece implements Serializable {
 
     public Bishop(Type type, Celda celda){
         super(type,celda);

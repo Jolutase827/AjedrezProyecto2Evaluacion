@@ -1,11 +1,12 @@
 package es.ieslavereda.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public abstract class Pawn extends Piece {
+public abstract class Pawn extends Piece implements Serializable {
     private Set<Cordenada> list;
 
 

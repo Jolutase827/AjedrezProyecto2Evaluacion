@@ -5,10 +5,12 @@ import es.ieslavereda.model.Piece;
 
 import es.ieslavereda.model.Piece;
 
+import java.io.Serializable;
+
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public class ListDEPieces {
+public class ListDEPieces implements Serializable {
     private int size;
 
     private Node head;
@@ -131,7 +133,7 @@ public class ListDEPieces {
     }
 
 
-    class Node {
+    class Node implements Serializable{
         private Piece info;
 
         private Node next;

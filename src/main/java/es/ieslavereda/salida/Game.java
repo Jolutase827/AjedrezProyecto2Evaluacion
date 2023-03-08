@@ -84,7 +84,7 @@ public class Game {
      * </ul>
      */
     private static boolean finishGame(Tablero t,Color turno,String valorDeOpciones) {
-        return t.oneColorJakeMate(turno)||valorDeOpciones.equals("3");
+        return t.oneColorJakeMate(turno)||!valorDeOpciones.equals("3");
     }
 
 
@@ -98,9 +98,13 @@ public class Game {
     public static Cordenada cordenadaSeleccionarPieza(Tablero t,Color turno){
         System.out.println("Dime que ficha quieres mover con este formato (a1) o pulsa C para pausar el Juego");
         String aux = Tool.devuelveStringFormatoCelda(1);
+        if (aux.equalsIgnoreCase("c"))
+            return null;
         Cordenada cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         while (!Tool.comprobarPiezaMia(t,turno,cExit)){
             aux = Tool.devuelveStringFormatoCelda(1);
+            if (aux.equalsIgnoreCase("c"))
+                return null;
             cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
         }
         return cExit;

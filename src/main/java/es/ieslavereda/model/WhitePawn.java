@@ -1,8 +1,11 @@
 package es.ieslavereda.model;
+
+import java.io.Serializable;
+
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public final class WhitePawn extends Pawn {
+public final class WhitePawn extends Pawn implements Serializable {
 
 
     public WhitePawn(Celda celda){

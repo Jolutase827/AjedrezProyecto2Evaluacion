@@ -3,12 +3,14 @@ package es.ieslavereda.model;
 import com.diogonunes.jcolor.Attribute;
 import es.ieslavereda.TAD.ListDEPieces;
 
+import java.io.Serializable;
+
 import static com.diogonunes.jcolor.Ansi.colorize;
 
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public class DeletePieceManagerTAD implements IDeletePieceManager{
+public class DeletePieceManagerTAD implements IDeletePieceManager, Serializable {
     private ListDEPieces listDE;
 
     public DeletePieceManagerTAD(){

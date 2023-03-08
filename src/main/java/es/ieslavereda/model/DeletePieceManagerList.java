@@ -2,6 +2,7 @@ package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public class DeletePieceManagerList implements IDeletePieceManager{
+public class DeletePieceManagerList implements IDeletePieceManager, Serializable {
     private List<Piece> list;
 
     public DeletePieceManagerList(){

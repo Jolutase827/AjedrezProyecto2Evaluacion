@@ -2,12 +2,14 @@ package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
 
+import java.io.Serializable;
+
 import static com.diogonunes.jcolor.Ansi.colorize;
 
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public class Celda {
+public class Celda implements Serializable {
     private Piece piece;
 
     private Color color;

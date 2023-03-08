@@ -1,12 +1,13 @@
 package es.ieslavereda.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author José Luis Tárraga, Feat Joaquin
  */
-public abstract class King extends Piece{
+public abstract class King extends Piece implements Serializable {
     private Set<Cordenada> listCoordinate;
 
     public King(Type type, Celda celda){
