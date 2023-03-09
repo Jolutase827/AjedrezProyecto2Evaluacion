@@ -2,9 +2,13 @@ package es.ieslavereda.entrada;
 
 import es.ieslavereda.model.Color;
 import es.ieslavereda.model.Cordenada;
+import es.ieslavereda.model.Jugador;
 import es.ieslavereda.model.Tablero;
 
 import javax.print.DocFlavor;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 
 /**
@@ -110,5 +114,71 @@ public class Tool {
             t.getCelda(t.getKingPosition(color)).hightLightHake();
         }
         return t;
+    }
+    public static String ficheroVacio(){
+        if (partidasVacias()){
+            return partida1();
+        }else if (todasLasPartidasOcupadas()){
+            return Options.selccionarPartida();
+        }else
+            return buscadorDePartidasVacias();
+    }
+
+    public static String buscadorDePartidasVacias(){
+        if (partida1()==null)
+            return partida1();
+        else if (partida2()==null)
+            return partida2();
+        else
+            return partida3();
+    }
+
+    public static boolean todasLasPartidasOcupadas(){
+        return (partida1()!=null&&partida2()!=null&&partida3()!=null);
+    }
+
+    public static boolean partidasVacias(){
+        return (partida1()==null&&partida2()==null&&partida3()==null);
+    }
+
+    public static String partida1(){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida1.txt"))){
+
+            Tablero t = (Tablero) ois.readObject();
+            Jugador j1 = (Jugador) ois.readObject();
+            Jugador j2 = (Jugador) ois.readObject();
+            Color turno = (Color) ois.readObject();
+            return "src/main/java/Partida1.txt";
+
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
+    }
+
+    public static String partida2(){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida2.txt"))){
+
+            Tablero t = (Tablero) ois.readObject();
+            Jugador j1 = (Jugador) ois.readObject();
+            Jugador j2 = (Jugador) ois.readObject();
+            Color turno = (Color) ois.readObject();
+            return "src/main/java/Partida2.txt";
+
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
+    }
+    public static String partida3(){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida3.txt"))){
+
+            Tablero t = (Tablero) ois.readObject();
+            Jugador j1 = (Jugador) ois.readObject();
+            Jugador j2 = (Jugador) ois.readObject();
+            Color turno = (Color) ois.readObject();
+            return "src/main/java/Partida3.txt";
+
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
 }

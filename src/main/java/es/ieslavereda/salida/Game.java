@@ -7,6 +7,7 @@ import es.ieslavereda.model.Cordenada;
 import es.ieslavereda.model.Jugador;
 import es.ieslavereda.model.Tablero;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**
@@ -18,24 +19,43 @@ public class Game {
      */
     public static void start(){
         Scanner sc = new Scanner(System.in);
-        Tablero t;
-        Jugador j1;
-        Jugador j2;
+        String opcionDePartida;
         System.out.println("------------------------AJEDREZ-----------------------------------");
         System.out.println("----------------------Pulsa enter---------------------------------");
         sc.nextLine();
         Tool.borrar();
-        t = Options.menuTablero();
+        do {
+
+
+            opcionDePartida = Options.menuTablero();
+            Tool.borrar();
+            if (opcionDePartida.equals("1"))
+                partidaNueva();
+
+            if (opcionDePartida.equals("2"))
+                cargarPartida();
+        }while (opcionDePartida.equals("3"));
+
+    }
+
+    private static void cargarPartida() {
+        if (!Tool.partidasVacias()) {
+            String nombreDeLaPartida = Options.opcionesDePartida();
+        }else
+            System.out.println("No hay partidas guardadas inicia una nueva");
+
+    }
+
+    private static void partidaNueva() {
+        Tablero t = new Tablero();
+        Jugador j2;
+        Jugador j1;
+        System.out.println("Vamos a crear jugadores:");
+        j1 = Options.menuJugador(null, t);
         Tool.borrar();
-        if (t!=null) {
-            System.out.println("Vamos a crear jugadores:");
-            j1 = Options.menuJugador(null,t);
-            Tool.borrar();
-            j2 = Options.menuJugador(j1,t);
-            Tool.borrar();
-            startMatch(t,j1,j2);
-            System.out.println("QUE MALOS SOIS LOS DOS MIRA QUE OS CUESTA JAJAJAJAJAJAJA");
-        }
+        j2 = Options.menuJugador(j1, t);
+        Tool.borrar();
+        startMatch(t,j1,j2,Color.WHITE);
     }
 
     /**
@@ -44,8 +64,8 @@ public class Game {
      * @param j1 Player one
      * @param j2 Player two
      */
-    public static void startMatch(Tablero t, Jugador j1, Jugador j2){
-        Color turno = Color.WHITE;
+    public static void startMatch(Tablero t, Jugador j1, Jugador j2,Color turno1){
+        Color turno = turno1;
         Cordenada cordenadaPiece;
         Cordenada cordenadaMove;
         String valorDeOpciones = "3";

@@ -1,5 +1,6 @@
 package es.ieslavereda;
 
+import es.ieslavereda.entrada.Tool;
 import es.ieslavereda.salida.Game;
 /**
  * @author José Luis Tárraga

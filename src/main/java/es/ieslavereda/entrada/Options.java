@@ -18,30 +18,18 @@ public class Options {
      * Create board
      * @return Board with the characteristic that the user want;
      */
-    public static Tablero menuTablero(){
+    public static String menuTablero(){
         String opcion = "";
         System.out.println("Selecciona que quieres hacer: ");
         System.out.println("[1] Cargar partida");
         System.out.println("[2] Crear nueva partida");
         System.out.println("[3] Salir del juego");
         opcion = numero1al3();
-        return hacer(opcion);
+        return opcion;
     }
 
 
-    /**
-     * Ejecuta lo que el usuario ha colocado
-     * @param opcion the option that the user want
-     * @return Un tablero con las características que el usuario quiere
-     */
-    public static Tablero hacer(String opcion){
-        if (opcion.equals("1"))
-            return new Tablero();
-        else if (opcion.equals("2"))
-            return new Tablero();
-        else
-            return null;
-    }
+
 
     /**
      * Metodo para que el usuario introduzca los datos de cada jugador;
@@ -114,7 +102,30 @@ public class Options {
                     valido = true;
                     break;
                 default:
-                    System.out.println("Valor no valido por favor inserte un valor del 1 al 3?");
+                    System.out.println("Valor no valido por favor inserte un valor del 1 al 3");
+                    exit = sc.nextLine();
+                    break;
+            }
+        }while (!valido);
+        return exit;
+    }
+
+
+
+    public static String numero1al4(){
+        Scanner sc = new Scanner(System.in);
+        String exit = sc.nextLine();
+        boolean valido = false;
+        do {
+            switch (exit){
+                case ("1"):
+                case ("2"):
+                case ("3"):
+                case ("4"):
+                    valido = true;
+                    break;
+                default:
+                    System.out.println("Valor no valido por favor inserte un valor del 1 al 4");
                     exit = sc.nextLine();
                     break;
             }
@@ -151,7 +162,7 @@ public class Options {
      * @param turno Color del turno al que le toca jugar
      */
     public static void guardarPartida(Tablero t, Jugador j1, Jugador j2, Color turno){
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/java/Partidas.txt"))){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/java/Partida1.txt"))){
             oos.writeObject(t);
             oos.writeObject(j1);
             oos.writeObject(j2);
@@ -162,5 +173,45 @@ public class Options {
         }
     }
 
+
+    public static String selccionarPartida() {
+        mostrarPartidas();
+        System.out.println("-------------------Selecciona la partida que quieres remplazar-------------------");
+        System.out.println("[1]Partida 1");
+        System.out.println("[2]Partida 2");
+        System.out.println("[3]Partida 3");
+        System.out.println("[4]Atras");
+        String option = numero1al4();
+        return ((option.equals("1"))?Tool.partida1():(option.equals("2"))?Tool.partida2():(option.equals("3"))?Tool.partida3():"");
+    }
+
+    public static void mostrarPartidas(){
+        for (int i =0;i<3;i++) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream((i==0)?Tool.partida1():(i==2)?Tool.partida2():Tool.partida3()))) {
+
+                Tablero t = (Tablero) ois.readObject();
+                Jugador j1 = (Jugador) ois.readObject();
+                Jugador j2 = (Jugador) ois.readObject();
+                Color turno = (Color) ois.readObject();
+                System.out.println("Partida "+ (i+1) + ":" );
+                System.out.println();
+                System.out.println("TABLERO:");
+                System.out.println(t);
+                System.out.println();
+                System.out.println("Jugador 1: "+ j1.getNombre());
+                System.out.println("Jugador 2: "+ j2.getNombre());
+                System.out.println("Turno de " + ((turno.equals(j1.getColor()))?j1.getNombre():j2.getNombre()));
+                System.out.println("________________________________________________________________________________________");
+
+
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Partida "+ (i+1)+":");
+                System.out.println("---------------Vacia-----------------");
+                System.out.println("________________________________________________________________________________________");
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
 
 }
