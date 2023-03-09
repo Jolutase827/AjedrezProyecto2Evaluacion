@@ -7,7 +7,6 @@ import com.diogonunes.jcolor.Attribute;
 
 import java.io.*;
 import java.util.Scanner;
-import java.util.Set;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 /**
@@ -143,14 +142,17 @@ public class Options {
      */
     public static String opcionesDePausa(Tablero t, Jugador j1, Jugador j2, Color turno){
         String exit;
-        System.out.println("----------------------PAUSA----------------------");
-        System.out.println("[1]Salir del juego sin guardar");
-        System.out.println("[2]Guardar partida y salir");
-        System.out.println("[3]Reanudar");
-        exit = numero1al3();
-        if (exit.equals("2"))
-            guardarPartida(t,j1,j2,turno);
-
+        boolean salir;
+        do{
+            System.out.println("----------------------PAUSA----------------------");
+            System.out.println("[1]Salir del juego sin guardar");
+            System.out.println("[2]Guardar partida y salir");
+            System.out.println("[3]Reanudar");
+            exit = numero1al3();
+            salir = true;
+            if (exit.equals("2"))
+                salir = guardarPartida(t, j1, j2, turno);
+        }while (!salir);
         return exit;
     }
 
@@ -161,22 +163,29 @@ public class Options {
      * @param j2 Jugador 2
      * @param turno Color del turno al que le toca jugar
      */
-    public static void guardarPartida(Tablero t, Jugador j1, Jugador j2, Color turno){
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/main/java/Partida1.txt"))){
-            oos.writeObject(t);
-            oos.writeObject(j1);
-            oos.writeObject(j2);
-            oos.writeObject(turno);
-            System.out.println("Los datos se han guardado correctamente");
-        }catch (IOException e){
-            System.out.println("No se puede guardar el archivo");
+    public static boolean guardarPartida(Tablero t, Jugador j1, Jugador j2, Color turno){
+        String partida = Tool.ficheroVacio();
+        if (!partida.equals("4")) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(partida))) {
+                oos.writeObject(t);
+                oos.writeObject(j1);
+                oos.writeObject(j2);
+                oos.writeObject(turno);
+                System.out.println("Los datos se han guardado correctamente");
+                return true;
+            } catch (IOException e) {
+                System.out.println("No se puede guardar el archivo");
+                return false;
+            }
         }
+        return false;
+
     }
 
 
     public static String selccionarPartida() {
+        Tool.borrar();
         mostrarPartidas();
-        System.out.println("-------------------Selecciona la partida que quieres remplazar-------------------");
         System.out.println("[1]Partida 1");
         System.out.println("[2]Partida 2");
         System.out.println("[3]Partida 3");
@@ -185,9 +194,23 @@ public class Options {
         return ((option.equals("1"))?Tool.partida1():(option.equals("2"))?Tool.partida2():(option.equals("3"))?Tool.partida3():"");
     }
 
+    public static String selccionarPartidaParaCargar(){
+        Scanner sc = new Scanner(System.in);
+        String exit = selccionarPartida();
+        while (!Tool.partidaNoVacia(exit)){
+            if (exit.equals("4")){
+                return exit;
+            }
+            System.out.println("Esa partida no esta disponible");
+            sc.nextLine();
+            exit = selccionarPartida();
+        }
+        return selccionarPartida();
+    }
+
     public static void mostrarPartidas(){
         for (int i =0;i<3;i++) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream((i==0)?Tool.partida1():(i==2)?Tool.partida2():Tool.partida3()))) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream((i==0)?Tool.partida1():(i==1)?Tool.partida2():Tool.partida3()))) {
 
                 Tablero t = (Tablero) ois.readObject();
                 Jugador j1 = (Jugador) ois.readObject();

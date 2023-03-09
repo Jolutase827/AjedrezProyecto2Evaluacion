@@ -5,7 +5,6 @@ import es.ieslavereda.model.Cordenada;
 import es.ieslavereda.model.Jugador;
 import es.ieslavereda.model.Tablero;
 
-import javax.print.DocFlavor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,6 +14,7 @@ import java.util.Scanner;
  * @author José Luis Tárraga
  */
 public class Tool {
+
 
     /**
      * Method that clean all the display through a for that print 40 enter
@@ -119,29 +119,53 @@ public class Tool {
         if (partidasVacias()){
             return partida1();
         }else if (todasLasPartidasOcupadas()){
+            System.out.println("-------------------Selecciona la partida que quieres remplazar-------------------");
             return Options.selccionarPartida();
         }else
             return buscadorDePartidasVacias();
     }
 
+    public static String partida1(){
+        return "src/main/java/Partida1.txt";
+    }
+    public static String partida2(){
+        return "src/main/java/Partida2.txt";
+    }
+    public static String partida3(){
+        return "src/main/java/Partida3.txt";
+    }
     public static String buscadorDePartidasVacias(){
-        if (partida1()==null)
+        if (comprobarPartida1()==null)
             return partida1();
-        else if (partida2()==null)
+        else if (comprobarPartida2()==null)
             return partida2();
         else
             return partida3();
     }
 
     public static boolean todasLasPartidasOcupadas(){
-        return (partida1()!=null&&partida2()!=null&&partida3()!=null);
+        return (comprobarPartida1()!=null&& comprobarPartida2()!=null&& comprobarPartida3()!=null);
+    }
+
+    public static boolean partidaNoVacia(String partida){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(partida))){
+
+            Tablero t = (Tablero) ois.readObject();
+            Jugador j1 = (Jugador) ois.readObject();
+            Jugador j2 = (Jugador) ois.readObject();
+            Color turno = (Color) ois.readObject();
+            return true;
+
+        } catch (IOException | ClassNotFoundException e) {
+            return false;
+        }
     }
 
     public static boolean partidasVacias(){
-        return (partida1()==null&&partida2()==null&&partida3()==null);
+        return (comprobarPartida1()==null&& comprobarPartida2()==null&& comprobarPartida3()==null);
     }
 
-    public static String partida1(){
+    public static String comprobarPartida1(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida1.txt"))){
 
             Tablero t = (Tablero) ois.readObject();
@@ -155,7 +179,7 @@ public class Tool {
         }
     }
 
-    public static String partida2(){
+    public static String comprobarPartida2(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida2.txt"))){
 
             Tablero t = (Tablero) ois.readObject();
@@ -168,7 +192,7 @@ public class Tool {
             return null;
         }
     }
-    public static String partida3(){
+    public static String comprobarPartida3(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida3.txt"))){
 
             Tablero t = (Tablero) ois.readObject();

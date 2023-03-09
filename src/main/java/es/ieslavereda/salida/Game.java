@@ -8,6 +8,9 @@ import es.ieslavereda.model.Jugador;
 import es.ieslavereda.model.Tablero;
 
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 
 /**
@@ -30,19 +33,38 @@ public class Game {
             opcionDePartida = Options.menuTablero();
             Tool.borrar();
             if (opcionDePartida.equals("1"))
-                partidaNueva();
+                cargarPartida();
 
             if (opcionDePartida.equals("2"))
-                cargarPartida();
-        }while (opcionDePartida.equals("3"));
+                partidaNueva();
+        }while (!opcionDePartida.equals("3"));
 
     }
 
     private static void cargarPartida() {
+        Scanner sc = new Scanner(System.in);
         if (!Tool.partidasVacias()) {
-            String nombreDeLaPartida = Options.opcionesDePartida();
-        }else
+            System.out.println("------------------------Partidas disponibles-----------------------");
+            String nombreDeLaPartida = Options.selccionarPartidaParaCargar();
+            if (!nombreDeLaPartida.equals("4"))
+                try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreDeLaPartida))){
+
+                    Tablero t = (Tablero) ois.readObject();
+                    Jugador j1 = (Jugador) ois.readObject();
+                    Jugador j2 = (Jugador) ois.readObject();
+                    Color turno = (Color) ois.readObject();
+                    Tool.borrar();
+                    startMatch(t,j1,j2,turno);
+
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println("Ha avido un error vuelve a intentarlo");
+                    sc.nextLine();
+                }
+        }else {
             System.out.println("No hay partidas guardadas inicia una nueva");
+            sc.nextLine();
+        }
+        Tool.borrar();
 
     }
 
