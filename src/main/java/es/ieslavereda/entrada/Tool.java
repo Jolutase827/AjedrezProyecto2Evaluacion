@@ -36,8 +36,11 @@ public class Tool {
 
         while (!valido) {
             valido = (exit.length()==2||exit.compareToIgnoreCase("c")==0);
+            if (exit.length()==2){
+                valido = (exit.charAt(1)>='1'&&exit.charAt(1)<='9');
+            }
             if (!valido) {
-                System.out.println((i == 1) ? "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1 o escriba C para ir a opciones" : "ERROR 1.1: LA LONGITUD DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA");
+                System.out.println((i == 1) ? "ERROR 1.1: EL FORMATO NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1 o escriba C para ir a opciones" : "ERROR 1.1: EL FORMATO DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA");
                 exit = sc.nextLine();
             }
         }
