@@ -205,7 +205,7 @@ public class Options {
             sc.nextLine();
             exit = selccionarPartida();
         }
-        return selccionarPartida();
+        return exit;
     }
 
     public static void mostrarPartidas(){
