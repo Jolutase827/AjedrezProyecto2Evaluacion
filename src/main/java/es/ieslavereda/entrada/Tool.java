@@ -118,6 +118,11 @@ public class Tool {
         }
         return t;
     }
+
+    /**
+     * Comprueba que ficheros estan vacios
+     * @return Un fichero para sobreescribir;
+     */
     public static String ficheroVacio(){
         if (partidasVacias()){
             return partida1();
@@ -128,15 +133,32 @@ public class Tool {
             return buscadorDePartidasVacias();
     }
 
+    /**
+     * Da la partida 1
+     * @return Da el path de la partida 1 en formato String
+     */
     public static String partida1(){
         return "src/main/java/Partida1.txt";
     }
+    /**
+     * Da la partida 3
+     * @return Da el path de la partida 3 en formato String
+     */
     public static String partida2(){
         return "src/main/java/Partida2.txt";
     }
+    /**
+     * Da la partida 3
+     * @return Da el path de la partida 3 en formato String
+     */
     public static String partida3(){
         return "src/main/java/Partida3.txt";
     }
+
+    /**
+     * Busca las partidas sin objetos
+     * @return La partida sin objetos
+     */
     public static String buscadorDePartidasVacias(){
         if (comprobarPartida1()==null)
             return partida1();
@@ -146,10 +168,21 @@ public class Tool {
             return partida3();
     }
 
+    /**
+     * Comprueba si todas las partidas tienen objetos
+     * @return True: Si hay informacion en todas<br/> False: Si existe alguna vacia
+     *
+     *
+     */
     public static boolean todasLasPartidasOcupadas(){
         return (comprobarPartida1()!=null&& comprobarPartida2()!=null&& comprobarPartida3()!=null);
     }
 
+    /**
+     * Comprueba si la partida esta vacia
+     * @param partida la partida que queremos comprobar
+     * @return Si esta vacia o no
+     */
     public static boolean partidaNoVacia(String partida){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(partida))){
 
@@ -164,10 +197,18 @@ public class Tool {
         }
     }
 
+    /**
+     * Compruba si estan vacias todas las partidas
+     * @return Si estan vacias o no en formato boolean
+     */
     public static boolean partidasVacias(){
         return (comprobarPartida1()==null&& comprobarPartida2()==null&& comprobarPartida3()==null);
     }
 
+    /**
+     * Comprueba si la partida1 esta vacia
+     * @return Si esta vacia o no en formato boolean
+     */
     public static String comprobarPartida1(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida1.txt"))){
 
@@ -182,6 +223,10 @@ public class Tool {
         }
     }
 
+    /**
+     * Comprueba si la partida2 esta vacia
+     * @return Si esta vacia o no en formato boolean
+     */
     public static String comprobarPartida2(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida2.txt"))){
 
@@ -195,6 +240,11 @@ public class Tool {
             return null;
         }
     }
+
+    /**
+     * Comprueba si la partida3 esta vacia
+     * @return Si esta vacia o no en formato boolean
+     */
     public static String comprobarPartida3(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/main/java/Partida3.txt"))){
 

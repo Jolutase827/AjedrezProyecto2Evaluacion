@@ -110,7 +110,10 @@ public class Options {
     }
 
 
-
+    /**
+     * Pregunta un numero hasta que sea uno del 1 al 4
+     * @return Numero del 1 al 4 en formato String
+     */
     public static String numero1al4(){
         Scanner sc = new Scanner(System.in);
         String exit = sc.nextLine();
@@ -182,7 +185,10 @@ public class Options {
 
     }
 
-
+    /**
+     * Hace que el usuario seleccione una Partida
+     * @return El fichero de partida seleccionado
+     */
     public static String selccionarPartida() {
         Tool.borrar();
         mostrarPartidas();
@@ -194,6 +200,10 @@ public class Options {
         return ((option.equals("1"))?Tool.partida1():(option.equals("2"))?Tool.partida2():(option.equals("3"))?Tool.partida3():"");
     }
 
+    /**
+     * Hace que el usuario seleccione una partida para Cargar
+     * @return Fichero donde esta la partida que se va a cargar
+     */
     public static String selccionarPartidaParaCargar(){
         Scanner sc = new Scanner(System.in);
         String exit = selccionarPartida();
@@ -208,6 +218,9 @@ public class Options {
         return exit;
     }
 
+    /**
+     * Muestra las partidas que existen
+     */
     public static void mostrarPartidas(){
         for (int i =0;i<3;i++) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream((i==0)?Tool.partida1():(i==1)?Tool.partida2():Tool.partida3()))) {
