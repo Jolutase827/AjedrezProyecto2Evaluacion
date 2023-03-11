@@ -41,6 +41,9 @@ public class Game {
 
     }
 
+    /**
+     * Carga la partida que selecciona el usuario para jugar
+     */
     private static void cargarPartida() {
         Scanner sc = new Scanner(System.in);
         if (!Tool.partidasVacias()) {
@@ -68,6 +71,9 @@ public class Game {
 
     }
 
+    /**
+     * Crea una partida nueva
+     */
     private static void partidaNueva() {
         Tablero t = new Tablero();
         Jugador j2;
