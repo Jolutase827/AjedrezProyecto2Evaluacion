@@ -117,7 +117,7 @@ public class OnlineGame {
 
     public static void unirseAPartida(){
         Scanner sc = new Scanner(System.in);
-        String usuario = "invitado";
+        String usuario = "10.1.0.13";
         int puerto;
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Dime que partida quieres entrar:"+Colorines.RESET);
         puerto = pedirInteger();
