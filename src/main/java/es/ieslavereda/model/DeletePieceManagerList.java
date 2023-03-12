@@ -1,6 +1,7 @@
 package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
+import es.ieslavereda.Colorines;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -42,7 +43,7 @@ public class DeletePieceManagerList implements IDeletePieceManager, Serializable
 
     @Override
     public String toString() {
-        String output="                   DEAD PIECES\n      ";
+        String output="      "+ Colorines.BLACK_BACKGROUND +"             DEAD PIECES            "+Colorines.RESET+"\n      ";
         Piece.Type[] pts = Piece.Type.values();
         for (Piece.Type pt : pts){
             if (pt.getColor()==Color.WHITE){
@@ -59,7 +60,7 @@ public class DeletePieceManagerList implements IDeletePieceManager, Serializable
                 output += colorize(" "+count(pt)+" ",pt.getColor().getAttribute() , Attribute.BACK_COLOR(180, 180, 180));
             }
         }
-        output+="\n\n                   LIVE PIECES\n      ";
+        output+="\n\n      "+Colorines.BLACK_BACKGROUND+"             LIVE PIECES            "+Colorines.RESET+"\n      ";
         for (Piece.Type pt : pts){
             if (pt.getColor()==Color.WHITE){
                 output+= colorize(" "+pt.getShape()+" " ,pt.getColor().getAttribute(), Attribute.BACK_COLOR(100, 100, 100));

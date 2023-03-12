@@ -1,5 +1,6 @@
 package es.ieslavereda.entrada;
 
+import es.ieslavereda.Colorines;
 import es.ieslavereda.model.Color;
 import es.ieslavereda.model.Jugador;
 import es.ieslavereda.model.Tablero;
@@ -19,10 +20,11 @@ public class Options {
      */
     public static String menuTablero(){
         String opcion = "";
-        System.out.println("Selecciona que quieres hacer: ");
-        System.out.println("[1] Cargar partida");
-        System.out.println("[2] Crear nueva partida");
-        System.out.println("[3] Salir del juego");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Selecciona que quieres hacer: "+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[1] Cargar partida"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[2] Crear nueva partida"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[3] Partida online"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[4] Salir del juego"+Colorines.RESET);
         opcion = numero1al3();
         return opcion;
     }
@@ -40,16 +42,16 @@ public class Options {
         Scanner sc = new Scanner(System.in);
         String valor;
         int i = (j==null)? 1:2;
-        System.out.println("Dime el nombre que tiene el jugador"+i);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Dime el nombre que tiene el jugador"+i+Colorines.RESET);
         if (i==2){
             valor = comprobarNombre(j.getNombre());
-            System.out.println("El color que se le va a asignar por defecto al jugador 2 es el color "+((j.getColor().equals(Color.BLACK))?colorize(colorize("blanco",Attribute.BACK_COLOR(255,255,255)),Attribute.TEXT_COLOR(0,0,0)):colorize(colorize("negro",Attribute.TEXT_COLOR(0,0,0)),Attribute.BACK_COLOR(255,255,255)))+" pulsa enter para empezar");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"El color que se le va a asignar por defecto al jugador 2 es el color "+((j.getColor().equals(Color.BLACK))?colorize(colorize("blanco",Attribute.BACK_COLOR(255,255,255)),Attribute.TEXT_COLOR(0,0,0)):colorize(colorize("negro",Attribute.TEXT_COLOR(0,0,0)),Attribute.BACK_COLOR(255,255,255)))+Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+" pulsa enter para empezar"+Colorines.RESET);
             sc.nextLine();
             return (new Jugador(valor,t,j.getColor().next()));
         }else {
             Color c;
             valor= sc.nextLine();
-            System.out.println("Dime el color que va a coger el jugador" + i);
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Dime el color que va a coger el jugador" + i+Colorines.RESET);
             c = preguntarColor();
             return new Jugador(valor,t,c);
         }
@@ -64,7 +66,7 @@ public class Options {
         Scanner sc = new Scanner(System.in);
         String exit = sc.nextLine();
         while (exit.equals(nombreOtroJ)){
-            System.out.println("Es aburrido jugar contra uno mismo escribe un nombre distinto al anterior");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+" El nombre del otro jugador es el mismo"+Colorines.RESET);
             exit = sc.nextLine();
         }
         return exit;
@@ -79,7 +81,7 @@ public class Options {
         String colorToString;
         colorToString = sc.nextLine();
         while (colorToString.compareToIgnoreCase("negro")!=0&&colorToString.compareToIgnoreCase("blanco")!=0){
-            System.out.println("Eso que has escrito que es BLANCO O NEGRO");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Eso que has escrito que es BLANCO O NEGRO"+Colorines.RESET);
             colorToString = sc.nextLine();
         }
         return (colorToString.compareToIgnoreCase("negro")==0)?Color.BLACK:Color.WHITE;
@@ -101,7 +103,7 @@ public class Options {
                     valido = true;
                     break;
                 default:
-                    System.out.println("Valor no valido por favor inserte un valor del 1 al 3");
+                    System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Valor no valido por favor inserte un valor del 1 al 3"+Colorines.RESET);
                     exit = sc.nextLine();
                     break;
             }
@@ -127,7 +129,7 @@ public class Options {
                     valido = true;
                     break;
                 default:
-                    System.out.println("Valor no valido por favor inserte un valor del 1 al 4");
+                    System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Valor no valido por favor inserte un valor del 1 al 4"+Colorines.RESET);
                     exit = sc.nextLine();
                     break;
             }
@@ -147,10 +149,10 @@ public class Options {
         String exit;
         boolean salir;
         do{
-            System.out.println("----------------------PAUSA----------------------");
-            System.out.println("[1]Salir del juego sin guardar");
-            System.out.println("[2]Guardar partida y salir");
-            System.out.println("[3]Reanudar");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"----------------------PAUSA----------------------"+Colorines.RESET);
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[1]Salir del juego sin guardar"+Colorines.RESET);
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[2]Guardar partida y salir"+Colorines.RESET);
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[3]Reanudar"+Colorines.RESET);
             exit = numero1al3();
             salir = true;
             if (exit.equals("2"))
@@ -167,6 +169,7 @@ public class Options {
      * @param turno Color del turno al que le toca jugar
      */
     public static boolean guardarPartida(Tablero t, Jugador j1, Jugador j2, Color turno){
+        Scanner sc = new Scanner(System.in);
         String partida = Tool.ficheroVacio();
         if (!partida.equals("4")) {
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(partida))) {
@@ -174,10 +177,12 @@ public class Options {
                 oos.writeObject(j1);
                 oos.writeObject(j2);
                 oos.writeObject(turno);
-                System.out.println("Los datos se han guardado correctamente");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Los datos se han guardado correctamente"+Colorines.RESET);
+                sc.nextLine();
                 return true;
             } catch (IOException e) {
-                System.out.println("No se puede guardar el archivo");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"No se puede guardar el archivo"+Colorines.RESET);
+                sc.nextLine();
                 return false;
             }
         }
@@ -192,10 +197,10 @@ public class Options {
     public static String selccionarPartida() {
         Tool.borrar();
         mostrarPartidas();
-        System.out.println("[1]Partida 1");
-        System.out.println("[2]Partida 2");
-        System.out.println("[3]Partida 3");
-        System.out.println("[4]Atras");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"[1]Partida 1"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"[2]Partida 2"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"[3]Partida 3"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"[4]Atras"+Colorines.RESET);
         String option = numero1al4();
         return ((option.equals("1"))?Tool.partida1():(option.equals("2"))?Tool.partida2():(option.equals("3"))?Tool.partida3():"");
     }
@@ -211,7 +216,7 @@ public class Options {
             if (exit.equals("4")){
                 return exit;
             }
-            System.out.println("Esa partida no esta disponible");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Esa partida no esta disponible"+Colorines.RESET);
             sc.nextLine();
             exit = selccionarPartida();
         }
@@ -229,21 +234,21 @@ public class Options {
                 Jugador j1 = (Jugador) ois.readObject();
                 Jugador j2 = (Jugador) ois.readObject();
                 Color turno = (Color) ois.readObject();
-                System.out.println("Partida "+ (i+1) + ":" );
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Partida "+ (i+1) + ":" +Colorines.RESET);
                 System.out.println();
-                System.out.println("TABLERO:");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"TABLERO:"+Colorines.RESET);
                 System.out.println(t);
                 System.out.println();
-                System.out.println("Jugador 1: "+ j1.getNombre());
-                System.out.println("Jugador 2: "+ j2.getNombre());
-                System.out.println("Turno de " + ((turno.equals(j1.getColor()))?j1.getNombre():j2.getNombre()));
-                System.out.println("________________________________________________________________________________________");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Jugador 1: "+ j1.getNombre()+Colorines.RESET);
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Jugador 2: "+ j2.getNombre()+Colorines.RESET);
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Turno de " + ((turno.equals(j1.getColor()))?j1.getNombre():j2.getNombre())+Colorines.RESET);
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"________________________________________________________________________________________"+Colorines.RESET);
 
 
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Partida "+ (i+1)+":");
-                System.out.println("---------------Vacia-----------------");
-                System.out.println("________________________________________________________________________________________");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Partida "+ (i+1)+":"+Colorines.RESET);
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"---------------Vacia-----------------"+Colorines.RESET);
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+ "________________________________________________________________________________________"+Colorines.RESET);
             }
             System.out.println();
             System.out.println();

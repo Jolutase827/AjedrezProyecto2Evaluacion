@@ -1,5 +1,6 @@
 package es.ieslavereda.entrada;
 
+import es.ieslavereda.Colorines;
 import es.ieslavereda.model.Color;
 import es.ieslavereda.model.Cordenada;
 import es.ieslavereda.model.Jugador;
@@ -40,7 +41,7 @@ public class Tool {
                 valido = (exit.charAt(1)>='1'&&exit.charAt(1)<='9');
             }
             if (!valido) {
-                System.out.println((i == 1) ? "ERROR 1.1: EL FORMATO NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1 o escriba C para ir a opciones" : "ERROR 1.1: EL FORMATO DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+((i == 1) ? "ERROR 1.1: EL FORMATO NO ES VALIDO POR FAVOR SELECCIONE UNA FICHA CON FORMATO a1 o escriba C para ir a opciones" : "ERROR 1.1: EL FORMATO DEL VALOR NO ES VALIDO POR FAVOR SELECCIONE UNA CELDA CON FORMATO (a1) O ESCRIBE (c) PARA SOLTAR LA PIEZA")+Colorines.RESET);
                 exit = sc.nextLine();
             }
         }
@@ -64,11 +65,11 @@ public class Tool {
                 if (t.movementsValid(c).contains(cExit))
                     return true;
                 else
-                    System.out.println("Error 1.6: SI MUEVES A ESA CORDENADA LA PIEZA TE PUEDEN MATAR AL REY");
+                    System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Error 1.6: SI MUEVES A ESA CORDENADA LA PIEZA TE PUEDEN MATAR AL REY"+Colorines.RESET);
             else
-                System.out.println("ERROR 1.5:LA PIEZA NO PUEDE REALIZAR ESE MOVIMIENTO");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"ERROR 1.5:LA PIEZA NO PUEDE REALIZAR ESE MOVIMIENTO"+Colorines.RESET);
         else
-            System.out.println("ERROR 1.2: LA CORDENADA NO ESTA EN FORMATO (a1) O LOS VALORES NO SON DE LA 'A' A LA 'H' O DEL '1' AL '8'");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"ERROR 1.2: LA CORDENADA NO ESTA EN FORMATO (a1) O LOS VALORES NO SON DE LA 'A' A LA 'H' O DEL '1' AL '8'"+Colorines.RESET);
 
         return false;
     }
@@ -92,15 +93,15 @@ public class Tool {
                         if (t.piecesSalveKing(cExit,turno).contains(cExit))
                             return true;
                         else
-                            System.out.println("Error 1.6: NO PUEDES MOVER ESTA PIEZA PORQUE SI NO MATAN A TU REY");
+                            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Error 1.6: NO PUEDES MOVER ESTA PIEZA PORQUE SI NO MATAN A TU REY"+Colorines.RESET);
                     else
-                        System.out.println("Error 1.5: LA PIEZA NO TIENE MOVIMIENTOS");
+                        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Error 1.5: LA PIEZA NO TIENE MOVIMIENTOS"+Colorines.RESET);
                 else
-                    System.out.println("ERROR 1.4: LA PIEZA NO ES DE TU COLOR");
+                    System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"ERROR 1.4: LA PIEZA NO ES DE TU COLOR"+Colorines.RESET);
             else
-                System.out.println("ERROR 1.3: LA CELDA ESTA VACIA");
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"ERROR 1.3: LA CELDA ESTA VACIA"+Colorines.RESET);
         else
-            System.out.println("ERROR 1.2: LA CORDENADA NO ESTA EN FORMATO (a1) O LOS VALORES NO SON DE LA 'A' A LA 'H' O DEL '1' AL '8'");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"ERROR 1.2: LA CORDENADA NO ESTA EN FORMATO (a1) O LOS VALORES NO SON DE LA 'A' A LA 'H' O DEL '1' AL '8'"+Colorines.RESET);
 
         return false;
     }
@@ -127,7 +128,7 @@ public class Tool {
         if (partidasVacias()){
             return partida1();
         }else if (todasLasPartidasOcupadas()){
-            System.out.println("-------------------Selecciona la partida que quieres remplazar-------------------");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"-------------------Selecciona la partida que quieres remplazar-------------------"+Colorines.RESET);
             return Options.selccionarPartida();
         }else
             return buscadorDePartidasVacias();

@@ -1,5 +1,6 @@
 package es.ieslavereda.salida;
 
+import es.ieslavereda.Colorines;
 import es.ieslavereda.entrada.Options;
 import es.ieslavereda.entrada.Tool;
 import es.ieslavereda.model.Color;
@@ -23,8 +24,8 @@ public class Game {
     public static void start(){
         Scanner sc = new Scanner(System.in);
         String opcionDePartida;
-        System.out.println("------------------------AJEDREZ-----------------------------------");
-        System.out.println("----------------------Pulsa enter---------------------------------");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"------------------------AJEDREZ-----------------------------------"+Colorines.RESET);
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"----------------------Pulsa enter---------------------------------"+Colorines.RESET);
         sc.nextLine();
         Tool.borrar();
         do {
@@ -37,7 +38,9 @@ public class Game {
 
             if (opcionDePartida.equals("2"))
                 partidaNueva();
-        }while (!opcionDePartida.equals("3"));
+            if (opcionDePartida.equals("3"))
+                OnlineGame.optionsPartidaOnline();
+        }while (!opcionDePartida.equals("4"));
 
     }
 
@@ -47,7 +50,7 @@ public class Game {
     private static void cargarPartida() {
         Scanner sc = new Scanner(System.in);
         if (!Tool.partidasVacias()) {
-            System.out.println("------------------------Partidas disponibles-----------------------");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"------------------------Partidas disponibles-----------------------"+Colorines.RESET);
             String nombreDeLaPartida = Options.selccionarPartidaParaCargar();
             if (!nombreDeLaPartida.equals("4"))
                 try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreDeLaPartida))){
@@ -60,11 +63,11 @@ public class Game {
                     startMatch(t,j1,j2,turno);
 
                 } catch (IOException | ClassNotFoundException e) {
-                    System.out.println("Ha avido un error vuelve a intentarlo");
+                    System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"Ha avido un error vuelve a intentarlo"+Colorines.RESET);
                     sc.nextLine();
                 }
         }else {
-            System.out.println("No hay partidas guardadas inicia una nueva");
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"No hay partidas guardadas inicia una nueva"+Colorines.RESET);
             sc.nextLine();
         }
         Tool.borrar();
@@ -78,7 +81,7 @@ public class Game {
         Tablero t = new Tablero();
         Jugador j2;
         Jugador j1;
-        System.out.println("Vamos a crear jugadores:");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Vamos a crear jugadores:"+Colorines.RESET);
         j1 = Options.menuJugador(null, t);
         Tool.borrar();
         j2 = Options.menuJugador(j1, t);
@@ -93,18 +96,19 @@ public class Game {
      * @param j2 Player two
      */
     public static void startMatch(Tablero t, Jugador j1, Jugador j2,Color turno1){
+        Scanner sc = new Scanner(System.in);
         Color turno = turno1;
         Cordenada cordenadaPiece;
         Cordenada cordenadaMove;
         String valorDeOpciones = "3";
-        System.out.println("Empieza el juego");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Empieza el juego"+Colorines.RESET);
         while (!finishGame(t,turno,valorDeOpciones)) {
             t = Tool.inicioDeTurno(turno,t);
             System.out.println(t);
             if (turno.equals(j1.getColor())) {
-                System.out.println("Turno de " + j1.getNombre() + " que utiliza -> "+j1.getColor());
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Turno de " + j1.getNombre() + " que utiliza -> "+j1.getColor()+Colorines.RESET);
             } else {
-                System.out.println("Turno de " + j2.getNombre() + " que utiliza ->" + j2.getColor());
+                System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Turno de " + j2.getNombre() + " que utiliza ->" + j2.getColor()+Colorines.RESET);
             }
             cordenadaPiece = cordenadaSeleccionarPieza(t,turno);
             if (cordenadaPiece!=null) {
@@ -119,6 +123,14 @@ public class Game {
             }else
                 valorDeOpciones = Options.opcionesDePausa(t,j1,j2,turno);
         }
+        if (t.oneColorJake(j1.getColor())){
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"El ganador es "+ j2.getNombre()+Colorines.RESET);
+            sc.nextLine();
+        }
+        if (t.oneColorJake(j2.getColor())){
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"El ganador es "+ j1.getNombre()+Colorines.RESET);
+            sc.nextLine();
+        }
     }
 
     /**
@@ -131,7 +143,7 @@ public class Game {
      *     <li>False: When the king isn't in check-mate</li>
      * </ul>
      */
-    private static boolean finishGame(Tablero t,Color turno,String valorDeOpciones) {
+    static boolean finishGame(Tablero t, Color turno, String valorDeOpciones) {
         return t.oneColorJakeMate(turno)||!valorDeOpciones.equals("3");
     }
 
@@ -144,7 +156,7 @@ public class Game {
      * @return Coordinate of the piece that the user select
      */
     public static Cordenada cordenadaSeleccionarPieza(Tablero t,Color turno){
-        System.out.println("Dime que ficha quieres mover con este formato (a1) o pulsa C para pausar el Juego");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Dime que ficha quieres mover con este formato (a1) o pulsa C para pausar el Juego"+Colorines.RESET);
         String aux = Tool.devuelveStringFormatoCelda(1);
         if (aux.equalsIgnoreCase("c"))
             return null;
@@ -165,7 +177,7 @@ public class Game {
      * @return Coordinate where the user want to move the token
      */
     public static Cordenada cordenadaMoverPieza(Tablero t,Color color){
-        System.out.println("Donde quieres mover la pieza inserte la cordenada con formato (a1) o si quieres soltar la pieza pulsa c");
+        System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Donde quieres mover la pieza inserte la cordenada con formato (a1) o si quieres soltar la pieza pulsa c"+Colorines.RESET);
         Cordenada cExit = null;
         String aux = Tool.devuelveStringFormatoCelda(2);
         if (aux.length()==2)

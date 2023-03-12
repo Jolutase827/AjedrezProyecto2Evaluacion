@@ -1,6 +1,8 @@
 package es.ieslavereda.model;
 
 
+import es.ieslavereda.Colorines;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -208,16 +210,16 @@ public class Tablero implements Serializable {
 
     @Override
     public String toString(){
-        String salida = "            A  B  C  D  E  F  G  H\n";
+        String salida = "       "+Colorines.BLACK_BACKGROUND+ "    A  B  C  D  E  F  G  H    "+Colorines.RESET+"\n";
 
         for (int i = 0; i<8;i++) {
-            salida += "         " + (i + 1) + " ";
+            salida += "       "+Colorines.BLACK_BACKGROUND+ " " + (i + 1) + " "+Colorines.RESET;
             for (int j = 0; j <8; j++)
                 salida += celdas.get(new Cordenada((char)('A'+j),1+i));
-            salida += " " + (i+1)+ "\n";
+            salida += Colorines.BLACK_BACKGROUND+" " + (i+1)+" "+Colorines.RESET+"\n";
         }
 
-        salida += "            A  B  C  D  E  F  G  H\n\n\n" + deletePieceManager;
+        salida +=  "       " +Colorines.BLACK_BACKGROUND+"    A  B  C  D  E  F  G  H    "+Colorines.RESET+"\n\n\n"+ deletePieceManager ;
 
 
         return salida;
