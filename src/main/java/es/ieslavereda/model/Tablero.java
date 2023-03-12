@@ -51,11 +51,20 @@ public class Tablero implements Serializable {
         return celdas.get(cordenada);
     }
 
-
+    /**
+     * Comprueba si hay hacke mate hacia un color
+     * @param color Color del que queremos comprobar si hay jaque mate
+     * @return Si hay jaque mate o sin no en formato boolean
+     */
     public boolean oneColorJakeMate(Color color){
             return movementsValid(color).size()==0;
     }
 
+    /**
+     * Comprueba que cantidad de movimientos son validos por parte de un color
+     * @param color Color del jugador que queremos saber sus movimientos
+     * @return Conjunto de movimientos
+     */
     public Set<Cordenada> movementsValid(Color color){
         Set<Cordenada> cordenadas= new HashSet<>();
         for (Cordenada c : celdas.keySet()){
@@ -67,6 +76,12 @@ public class Tablero implements Serializable {
     }
 
 
+    /**
+     * Movimientos que salvan al rey de una pieza
+     * @param c Cordenada de la pieza que queremos comprobar sus movimientos
+     * @param color Color de la pieza que queremos saber su movimiento
+     * @return Conjunto de movimientos que salvan al rey de la pieza
+     */
     public Set<Cordenada> movementsSalveKing(Cordenada c,Color color){
         Set<Cordenada> cordenadasExit = new HashSet<>();
         Piece p;
@@ -82,6 +97,12 @@ public class Tablero implements Serializable {
         return cordenadasExit;
     }
 
+    /**
+     * Las piezas que salvan al rey
+     * @param c Cordenada de la pieza que puede salvar al rey
+     * @param color Color de la pieza
+     * @return Las piezas que salvan al rey
+     */
     public Set<Cordenada> piecesSalveKing(Cordenada c,Color color){
         Set<Cordenada> cordenadasExit = new HashSet<>();
         Piece p;
@@ -97,6 +118,12 @@ public class Tablero implements Serializable {
         return cordenadasExit;
     }
 
+    /**
+     * Reseta los movimientos echos
+     * @param retorno Donde quiere volver la pieza movida
+     * @param movida Donde esta la pieza movida
+     * @param p Pieza que hay que revivir si la han matado
+     */
     public void resetMovement(Cordenada retorno, Cordenada movida,Piece p){
         getCelda(movida).getPiece().falseMoveto(retorno);
         if (p!=null)
@@ -104,11 +131,20 @@ public class Tablero implements Serializable {
     }
 
 
+    /**
+     * Comprueba si hay jake hacia el rey de un color
+     * @param color Color del rey que queremos ver si hay jaque
+     * @return Si esta en jaque o no en boolean
+     */
     public  boolean oneColorJake(Color color){
         return getAllOneColorMovements(color.next()).contains(getKingPosition(color));
     }
 
-
+    /**
+     * Coge todos los movimientos de un color
+     * @param color Color del las piezas que queremos saber sus movimientos
+     * @return Conjunto de posibles movimientos
+     */
     public Set<Cordenada> getAllOneColorMovements(Color color){
         Set<Cordenada> exit = new HashSet<>();
         for (Cordenada c: celdas.keySet()){
@@ -120,7 +156,11 @@ public class Tablero implements Serializable {
         return exit;
     }
 
-
+    /**
+     * Busca la posición del rey
+     * @param color Color del rey que queremos saber la posición
+     * @return Cordenada donde se encuentra el rey
+     */
     public Cordenada getKingPosition(Color color){
         for (Cordenada c : celdas.keySet()){
             if (!getCelda(c).isEmpty())

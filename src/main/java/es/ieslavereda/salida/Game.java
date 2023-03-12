@@ -170,6 +170,8 @@ public class Game {
         String aux = Tool.devuelveStringFormatoCelda(2);
         if (aux.length()==2)
             cExit = new Cordenada(aux.charAt(0),Integer.parseInt(aux.substring(1)));
+        if (aux.equalsIgnoreCase("c"))
+            return null;
         while (!Tool.comprobarCordenadaAptaMover(t,cExit,color)) {
             aux = Tool.devuelveStringFormatoCelda(2);
             if (aux.length()==2)
