@@ -25,7 +25,7 @@ public class Options {
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[2] Crear nueva partida"+Colorines.RESET);
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[3] Partida online"+Colorines.RESET);
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"[4] Salir del juego"+Colorines.RESET);
-        opcion = numero1al3();
+        opcion = numero1al4();
         return opcion;
     }
 
@@ -179,13 +179,16 @@ public class Options {
                 oos.writeObject(turno);
                 System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Los datos se han guardado correctamente"+Colorines.RESET);
                 sc.nextLine();
+                Tool.borrar();
                 return true;
             } catch (IOException e) {
                 System.out.println(Colorines.BLACK_BACKGROUND+Colorines.RED_BOLD+"No se puede guardar el archivo"+Colorines.RESET);
                 sc.nextLine();
+                Tool.borrar();
                 return false;
             }
         }
+        Tool.borrar();
         return false;
 
     }
@@ -202,7 +205,8 @@ public class Options {
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"[3]Partida 3"+Colorines.RESET);
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"[4]Atras"+Colorines.RESET);
         String option = numero1al4();
-        return ((option.equals("1"))?Tool.partida1():(option.equals("2"))?Tool.partida2():(option.equals("3"))?Tool.partida3():"");
+        Tool.borrar();
+        return ((option.equals("1"))?Tool.partida1():(option.equals("2"))?Tool.partida2():(option.equals("3"))?Tool.partida3():"4");
     }
 
     /**
@@ -220,6 +224,7 @@ public class Options {
             sc.nextLine();
             exit = selccionarPartida();
         }
+        Tool.borrar();
         return exit;
     }
 

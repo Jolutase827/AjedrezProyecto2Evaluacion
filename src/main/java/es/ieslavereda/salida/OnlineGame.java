@@ -210,6 +210,8 @@ public class OnlineGame {
     }
 
     public static boolean esUnNumero(String string){
+        if (string.length()==0)
+            return false;
         for (int i = 0; i<string.length();i++){
             if (string.charAt(i)<'0'||string.charAt(i)>'9')
                 return false;

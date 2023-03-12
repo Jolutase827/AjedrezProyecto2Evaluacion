@@ -41,6 +41,7 @@ public class Game {
             if (opcionDePartida.equals("3"))
                 OnlineGame.optionsPartidaOnline();
         }while (!opcionDePartida.equals("4"));
+        System.out.println("Muchas gracias vuelve pronto!");
 
     }
 
@@ -120,8 +121,10 @@ public class Game {
                     t.movePiece(cordenadaPiece, cordenadaMove);
                     turno = turno.next();
                 }
-            }else
-                valorDeOpciones = Options.opcionesDePausa(t,j1,j2,turno);
+            }else {
+                valorDeOpciones = Options.opcionesDePausa(t, j1, j2, turno);
+                Tool.borrar();
+            }
         }
         if (t.oneColorJake(j1.getColor())){
             System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"El ganador es "+ j2.getNombre()+Colorines.RESET);
