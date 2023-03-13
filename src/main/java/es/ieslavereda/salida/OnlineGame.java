@@ -55,11 +55,11 @@ public class OnlineGame {
             serverSocket = new ServerSocket(puerto);
             System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Su codigo de partida es "+puerto+" compartela con el jugador con el que quiere jugar"+Colorines.RESET);
             socket = serverSocket.accept();
-            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Alguien a entrado en la partida esperando a que se de identifique"+Colorines.RESET);
             entrada = new ObjectInputStream(socket.getInputStream());
             salida = new ObjectOutputStream(socket.getOutputStream());
             salida.writeObject(j1);
             salida.writeObject(t);
+            System.out.println(Colorines.BLACK_BACKGROUND+Colorines.PURPLE_BOLD+"Alguien a entrado en la partida esperando a que se de identifique"+Colorines.RESET);
             j2 = (Jugador) entrada.readObject();
             Color turno = Color.WHITE;
             salida.writeObject(turno);
@@ -122,7 +122,7 @@ public class OnlineGame {
         System.out.println(Colorines.BLACK_BACKGROUND+Colorines.GREEN_BOLD+"Dime que partida quieres entrar:"+Colorines.RESET);
         puerto = pedirInteger();
         Socket socket;
-        Tablero t = new Tablero();
+        Tablero t;
         Jugador j2;
         Jugador j1;
         Color turno;
